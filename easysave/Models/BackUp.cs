@@ -23,4 +23,5 @@ namespace easysave.Models
             Type = type;
             MirrorDir = mirrorDir;
         }
+    }
 }
