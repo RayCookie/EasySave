@@ -8,5 +8,19 @@ namespace easysave.Models
 {
     class DataState
     {
+        public string Name { get; set; }
+        public DateTime statedate { get; set; }
+        public Boolean SaveState { get; set; }
+        public float TotalNumberFileToCopy { get; set; }
+        public float TotalFileSize { get; set; }
+        public string PathSourceFile { get; set; }
+        public string PathFileDestination { get; set; }
+        public float NumberFileRemaining { get; set; }
+        public float SizeRemainingFile { get; set; }
+        public float Progression { get; set; }
+        public DataState(string Name)
+        {
+            SaveName = Name;
+        }
     }
 }
