@@ -23,5 +23,13 @@ namespace easysave.Models
             Type = type;
             MirrorDir = mirrorDir;
         }
+        public Backup(string saveName, string sourceDir, string targetDir, int type, string mirrorDir)
+        {
+            SaveName = saveName;
+            SourceDir = sourceDir;
+            TargetDir = targetDir;
+            Type = type;
+            MirrorDir = mirrorDir;
+        }
     }
 }
