@@ -52,7 +52,7 @@ namespace easysave.Models
 
             if (jsonString.Length != 0)
             {
-                DataState[] list = JsonConvert.DeserializeObject<DataState[]>(jsonString); //Derialization of the json fille
+                DataState[] list = JsonConvert.DeserializeObject<DataState[]>(jsonString); //Derialization of the json file
                 foreach (var obj in list) //Loop to add the information in the json
                 {
                     stateList.Add(obj);//il ajoute les element recuperer dans le fichier statelist
