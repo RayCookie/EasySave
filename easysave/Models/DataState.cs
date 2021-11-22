@@ -20,7 +20,22 @@ namespace easysave.Models
         public float Progression { get; set; }
         public DataState(string Name)
         {
-            SaveName = Name;
+            Name = "";
+            statedate="";
+            SaveState=0;
+            TotalNumberFileToCopy=0;
+            TotalFileSize=0;
+            PathSourceFile="";
+            NumberFileRemaining=0;
+            SizeRemainingFile=0;
+            Progression=0;
+
+
+
+
+
+
+
         }
     }
 }
