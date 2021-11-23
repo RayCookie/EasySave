@@ -16,7 +16,7 @@ namespace easysave.Models
         public string userMenuInput { get; set; }
         private string serializeObj;
          public string NameStateFile { get; set; }
-        
+        public TimeSpan TimeTransfert { get; set; }
 
         public string backupListFile = System.Environment.CurrentDirectory + @"\\";
         public string stateFile = System.Environment.CurrentDirectory + @"\\";
@@ -173,7 +173,7 @@ namespace easysave.Models
         DataLog datalogs = new DataLog //Apply the retrieved values ​​to their classes
 
             {
-                Name = name,
+                SaveName=savename,
                 SourceDir = sourcedir,
                 TargetDir = targetdir,
                 BackupDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
