@@ -118,7 +118,7 @@ namespace easysave.Models
             string readfile = File.ReadAllText(path);// Open the path to read from.
             if(readfile.lenght!=0)
             {
-                BackUp list = JsonConvert.DeserializeObject<BackUp[](readfile);
+                BackUp list = JsonConvert.DeserializeObject<BackUp[]>(readfile);
                 foreach(var obj in list)
                 {
                     if(obj.saveName == backupname)
@@ -143,7 +143,7 @@ namespace easysave.Models
             string readfile = File.ReadAllText(path);// Open the path to read from.
             if(readfile.lenght!=0)
             {
-                BackUp list = JsonConvert.DeserializeObject<BackUp[](readfile);
+                BackUp list = JsonConvert.DeserializeObject<BackUp[]>(readfile);
                 foreach(var obj in list)
                 {
                     
@@ -156,9 +156,10 @@ namespace easysave.Models
              {
                 
              }
-            else //for differential save*
-            { 
+                else //for differential save*
+                { 
                 
-            }
+                }
+        }
     }
 }
