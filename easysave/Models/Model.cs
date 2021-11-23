@@ -19,6 +19,9 @@ namespace easysave.Models
 
         public string backupListFile = System.Environment.CurrentDirectory + @"\\";
         public string stateFile = System.Environment.CurrentDirectory + @"\\";
+        public string SourceDir { get; set; }
+        public string TargetDir { get; set; }
+        public long TotalSize { get; set; }
         public Model()
         {
             userMenuInput =  " ";
@@ -160,6 +163,31 @@ namespace easysave.Models
                 { 
                 
                 }
+        }
+
+        public void UpdateLogFile(string savename, string sourcedir, string targetdir)//Function to allow modification of the log file
+        {
+        Stopwatch stopwatch = new Stopwatch();
+        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", TimeTransfert.Hours, TimeTransfert.Minutes, TimeTransfert.Seconds, TimeTransfert.Milliseconds / 10); //Formatting the stopwatch for better visibility in the file
+            
+        DataLog datalogs = new DataLog //Apply the retrieved values ​​to their classes
+
+            {
+                Name = name,
+                SourceDir = sourcedir,
+                TargetDir = targetdir,
+                BackupDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
+                TotalSize = TotalSize,
+                FileTransferTime = elapsedTime// fonction for better visibility in the file in relation with stopwatch,
+
+            };
+
+            string path = System.Environment.CurrentDirectory; //Allows you to retrieve the path of the program environment
+            var directory = System.IO.Path.GetDirectoryName(path); // This file saves in the project: \EasySaveApp\bin
+
+            string serializeObj = JsonConvert.SerializeObject(datalogs, Formatting.Indented) + Environment.NewLine; //Serialization for writing to json file
+            File.AppendAllText(directory + @"DailyLogs_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json", serializeObj); //Function to write to log file
+        
         }
     }
 }
