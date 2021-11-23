@@ -11,11 +11,12 @@ namespace easysave.Models
 {
     class Model
     {
+        //variables
         public DataState DataState { get; set; }
         public string userMenuInput { get; set; }
         private string serializeObj;
          public string NameStateFile { get; set; }
-        public object JsonConvert { get; private set; }
+        
 
         public string backupListFile = System.Environment.CurrentDirectory + @"\\";
         public string stateFile = System.Environment.CurrentDirectory + @"\\";
@@ -93,7 +94,7 @@ namespace easysave.Models
                         obj.NumberFileRemaining = this.DataState.NumberFileRemaining;
                         obj.SizeRemainingFile = this.DataState.SizeRemainingFile;
                         obj.Progression = this.DataState.Progression;
-                        obj.statedateate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+                        obj.statedate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
                         obj.SaveState = this.DataState.SaveState;
                     }
 
@@ -108,27 +109,26 @@ namespace easysave.Models
 
 
         }
-        //variables:
-        public  string path  = System.Environment.CurrentDirectory + @"\Works\";
+        
         BackUp backup = null;
         //Function
         public void LaunchUniqueSave(String backupname)//launch a unique save function sans lupdate du logFile
         {
             
-            string readfile = File.ReadAllText(path);// Open the path to read from.
-            if(readfile.lenght!=0)
+            string readfile = File.ReadAllText(backupListFile);// Open the path to read from.
+            if(readfile.Length !=0)
             {
-                BackUp list = JsonConvert.DeserializeObject<BackUp[]>(readfile);
+                BackUp[] list = JsonConvert.DeserializeObject<BackUp[]>(readfile);
                 foreach(var obj in list)
                 {
-                    if(obj.saveName == backupname)
+                    if(obj.SaveName == backupname)
                     {
-                        backup = new Backup(obj.saveName, obj.sourceDir, obj.targetDir, obj.type, obj.mirrorDir); 
+                        backup = new BackUp(obj.SaveName, obj.SourceDir, obj.TargetDir, obj.Type, obj.MirrorDir); 
                     }
                 }
 
             }
-            if (backup.type==1)//for complete save
+            if (backup.Type==1)//for complete save
              {
                 
              }
@@ -140,19 +140,19 @@ namespace easysave.Models
         }
         public void LaunchSequentialSave()
         {
-            string readfile = File.ReadAllText(path);// Open the path to read from.
-            if(readfile.lenght!=0)
+            string readfile = File.ReadAllText(backupListFile);// Open the path to read from.
+            if(readfile.Length!=0)
             {
-                BackUp list = JsonConvert.DeserializeObject<BackUp[]>(readfile);
+                BackUp[] list = JsonConvert.DeserializeObject<BackUp[]>(readfile);
                 foreach(var obj in list)
                 {
                     
-                     backup = new Backup(obj.saveName, obj.sourceDir, obj.targetDir, obj.type, obj.mirrorDir); 
+                     backup = new BackUp(obj.SaveName, obj.SourceDir, obj.TargetDir, obj.Type, obj.MirrorDir); 
                     
                 }
 
             }
-            if (backup.type==1)//for complete save
+            if (backup.Type==1)//for complete save
              {
                 
              }

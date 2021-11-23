@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace EasySaveApp.view
+namespace easysave.view
 {
     class View
     {
@@ -54,11 +54,6 @@ namespace EasySaveApp.view
             Console.WriteLine("Please enter the path of the folder mirror backup. [ DRAG AND DROP YOUR FOLDER ] :");
         }
 
-        public void ErrorMenu(string result)
-        {
-            Console.WriteLine(result);
-        }
-
         public void ShowFile()
         {
             Console.Write("Please enter the name of your backup : ");
@@ -69,12 +64,12 @@ namespace EasySaveApp.view
             Console.Clear();
             Console.WriteLine("Here are the names of your backups : ");
         }
-
-
-
         public void ErrorMenu(string result)
         {
             Console.WriteLine(result);
         }
+
+
+
     }
 }
