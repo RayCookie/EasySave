@@ -6,3 +6,27 @@
   "FileTransferTime": "00:00:00.00",
   "TotalSize": 6
 }
+{
+  "SourceDir": "C:\\sourcepath",
+  "TargetDir": "C:\\Users\\TRETEC\\Desktop\\destination",
+  "SaveName": "test1",
+  "BackupDate": "24/11/2021 22:04:55",
+  "FileTransferTime": "00:00:00.00",
+  "TotalSize": 6
+}
+{
+  "SourceDir": "C:\\sourcepath",
+  "TargetDir": "C:\\Users\\TRETEC\\Desktop\\destination",
+  "SaveName": "test1",
+  "BackupDate": "24/11/2021 22:08:54",
+  "FileTransferTime": "00:00:00.00",
+  "TotalSize": 6
+}
+{
+  "SourceDir": "C:\\sourcepath",
+  "TargetDir": "C:\\Users\\TRETEC\\Desktop\\destination",
+  "SaveName": "test1",
+  "BackupDate": "24/11/2021 22:21:56",
+  "FileTransferTime": "00:00:00.00",
+  "TotalSize": 5
+}

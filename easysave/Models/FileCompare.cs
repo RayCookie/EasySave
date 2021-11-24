@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace easysave.Models
+namespace easysave.Model
 {
-    class FileCompare
+    //Class used for differential backup
+    //It allows the comparison of the hashes of the files to know which file has been modified.
+    class FileCompare : System.Collections.Generic.IEqualityComparer<System.IO.FileInfo>
     {
         public FileCompare() { }
+
         public bool Equals(System.IO.FileInfo f1, System.IO.FileInfo f2)
         {
             return (f1.Name == f2.Name &&

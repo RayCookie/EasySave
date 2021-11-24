@@ -1,41 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace easysave.Models
+namespace easysave.Model
 {
     class DataState
     {
-        private string nameStateFile;
+        // Declaration of properties that are used for saving information for the report file in JSON
+        public string SaveName { get; set; }
+        public string BackupDate { get; set; }
+        public bool SaveState { get; set; }
+        public string SourceFile { get; set; }
+        public string TargetFile { get; set; }
+        public float TotalFile { get; set; }
+        public long TotalSize { get; set; }
+        public float Progress { get; set; }
+        public long FileRest { get; set; }
+        public long TotalSizeRest { get; set; }
 
-        public DataState(string Name)
+        public DataState(string saveName)
         {
-            Name = "";
-            statedate = "";
-            SaveState = false;
-            TotalNumberFileToCopy = 0;
-            TotalFileSize = 0;
-            PathSourceFile = "";
-            NumberFileRemaining = 0;
-            SizeRemainingFile = 0;
-            Progression = 0;
-            Name = Name;
-
-
+            SaveName = saveName;
         }
-
-        public string Name { get; set; }
-        public string statedate { get; set; }
-        public Boolean SaveState { get; set; }
-        public float TotalNumberFileToCopy { get; set; }
-        public float TotalFileSize { get; set; }
-        public string PathSourceFile { get; set; }
-        public string PathFileDestination { get; set; }
-        public float NumberFileRemaining { get; set; }
-        public float SizeRemainingFile { get; set; }
-        public float Progression { get; set; }
-        
     }
 }

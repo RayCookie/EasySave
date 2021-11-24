@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 
-namespace easysave.Models
+
+namespace easysave.Model
 {
-    class DataLog
+    class DataLogs
     {
+        //Declaration of the properties that are used for the program log file
         public string SourceDir { get; set; }
         public string TargetDir { get; set; }
         public string SaveName { get; set; }
         public string BackupDate { get; set; }
-        public string FileTransferTime { get; set; }
+        public string TransactionTime { get; set; }
         public long TotalSize { get; set; }
+
 
     }
 }

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace easysave.Models
+namespace easysave.Model
 {
-    class BackUp
+    class Backup
     {
         // Declaration of properties that are used for saving backup information for the backup job file
         public string SourceDir { get; set; }
@@ -14,17 +12,8 @@ namespace easysave.Models
         public string SaveName { get; set; }
         public int Type { get; set; }
         public string MirrorDir { get; set; }
-        public BackUp(){}
-      
-        public BackUp(string saveName, string sourceDir, string targetDir, int type, string mirrorDir)
-        {
-            SaveName = saveName;
-            SourceDir = sourceDir;
-            TargetDir = targetDir;
-            Type = type;
-            MirrorDir = mirrorDir;
-        }
-        public void Backup(string saveName, string sourceDir, string targetDir, int type, string mirrorDir)
+
+        public Backup(string saveName, string sourceDir, string targetDir, int type, string mirrorDir)
         {
             SaveName = saveName;
             SourceDir = sourceDir;
@@ -33,4 +22,5 @@ namespace easysave.Models
             MirrorDir = mirrorDir;
         }
     }
+
 }

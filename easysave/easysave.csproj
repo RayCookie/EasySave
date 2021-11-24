@@ -50,7 +50,7 @@
     <Compile Include="Models\DataLog.cs" />
     <Compile Include="Models\DataState.cs" />
     <Compile Include="Models\FileCompare.cs" />
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
