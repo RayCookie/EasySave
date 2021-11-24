@@ -18,18 +18,6 @@ namespace easysave.Models
         public float NumberFileRemaining { get; set; }
         public float SizeRemainingFile { get; set; }
         public float Progression { get; set; }
-        public DataState(string Name)
-        {
-            Name = Name;
-           
-            
-
-
-
-
-
-
-
-        }
+        
     }
 }
