@@ -177,6 +177,7 @@ namespace easysave.ViewModel
                             model.TargetDir = GetTargetDir();  // Function for checking the folder path
                             Backup backup = new Backup(model.SaveName, model.SourceDir, model.TargetDir, model.Type, "");
                             model.AddSave(backup); // Calling the function to add a backup job
+                            Console.WriteLine("added with success ,press enter to go back to principal Menu");
                             break;
 
                         case 2: //Case 2, creating a differential backup job

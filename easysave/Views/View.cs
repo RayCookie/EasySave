@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using easysave.ViewModel;
+using easysave.Model;
 
 namespace easysave.view
 {
@@ -70,7 +71,7 @@ namespace easysave.view
         {
             Console.WriteLine("+--------------------------------------------------------+");
             Console.WriteLine("|                                                        |");
-            Console.WriteLine("|Please enter the path of the folder you want to back up.|");
+            Console.WriteLine("|Please enter the Name of the folder you want to back up.|");
             Console.WriteLine("|                                                        |");
         }
         //Display on the console when you have to enter the path of the folder that you want to back up
