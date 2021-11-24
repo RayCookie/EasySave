@@ -29,9 +29,10 @@ namespace easysave.Models
         public string stateFile = System.Environment.CurrentDirectory + @"\\";
         public string SourceDir { get; set; }
         public string TargetDir { get; set; }
+        public string UserCHoice { get; set; }
         public Model()
         {
-            userMenuInput =  " ";
+            UserCHoice =  " ";
 
             if (!Directory.Exists(backupListFile)) //Check if the folder is created
             {
@@ -246,11 +247,12 @@ namespace easysave.Models
 
         }
         
-        BackUp backup = null;
+        
         //Function
         public void LaunchUniqueSave(String backupname)//launch a unique save function sans lupdate du logFile
         {
-            
+            BackUp backup = null;
+            this.TotalSize = 0;
             string readfile = File.ReadAllText(backupListFile);// Open the path to read from.
             if(readfile.Length !=0)
             {
@@ -266,16 +268,24 @@ namespace easysave.Models
             }
             if (backup.Type==1)//for complete save
              {
-                
-             }
+                NameStateFile = backup.SaveName;
+                //call the complete save function
+                UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
+                Console.WriteLine("complete save for the job chosen is done succesfully");
+            }
             else //for differential save*
-            { 
-                
+            {
+                NameStateFile = backup.SaveName;
+                DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir);//call the DifferentialSave function
+                UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
+                Console.WriteLine("differntial save for the job chosen is done succesfully");
             }
 
         }
         public void LaunchSequentialSave()
         {
+            BackUp backup = null;
+            this.TotalSize = 0;
             string readfile = File.ReadAllText(backupListFile);// Open the path to read from.
             if(readfile.Length!=0)
             {
@@ -283,19 +293,25 @@ namespace easysave.Models
                 foreach(var obj in list)
                 {
                     
-                     backup = new BackUp(obj.SaveName, obj.SourceDir, obj.TargetDir, obj.Type, obj.MirrorDir); 
-                    
+                     backup = new BackUp(obj.SaveName, obj.SourceDir, obj.TargetDir, obj.Type, obj.MirrorDir);
+                    if (backup.Type == 1)//for complete save
+                    {
+                        NameStateFile = backup.SaveName;
+                        //call the complete save function
+                        UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
+                        Console.WriteLine("Complete save for all the jobs is done succesfully");
+                    }
+                    else //for differential save*
+                    {
+                        NameStateFile=backup.SaveName;
+                        DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir);//call the DifferentialSave function
+                        UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
+                        Console.WriteLine("differntial save for all the jobs is done succesfully");
+                    }
                 }
 
             }
-            if (backup.Type==1)//for complete save
-             {
-                
-             }
-                else //for differential save*
-                { 
-                
-                }
+            
         }
 
         public void UpdateLogFile(string savename, string sourcedir, string targetdir)//Function to allow modification of the log file

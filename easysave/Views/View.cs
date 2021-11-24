@@ -21,19 +21,20 @@ namespace easysave.view
         {
             Console.WriteLine("++++++++++++++++++++++++++++++++______________++++++++++++++++++++++++++++++++++");
             Console.WriteLine("+++++++++++++++++++++++++++____|              |_____++++++++++++++++++++++++++++");
-            Console.WriteLine("++++++++++++++++++++++++++|                         |+++++++++++++++++++++++++++");
-            Console.WriteLine("+++++++++++++++++++++++++ |    Choose a language    |+++++++++++++++++++++++++++");
+            Console.WriteLine("++++++++++++++++++++++++++|    Choose a language    |+++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++ |   choisissez une langue |+++++++++++++++++++++++++++");
             Console.WriteLine(" _________________________|                         |__________________________ ");
             Console.WriteLine("|                                                                              |");
-            Console.WriteLine("|                          1 +-----Francais----+----+                          |");
+            Console.WriteLine("|                          1 +-----French/Français----+----+                   |");
             Console.WriteLine("|                                                                              |");
             Console.WriteLine("|                                                                              |");
-            Console.WriteLine("|                          2 +-----English-----+----+                          |");
+            Console.WriteLine("|                          2 +-----English/englais-----+----+                  |");
             Console.WriteLine("|_________________________                           _________________________ |");
             Console.WriteLine("+++++++++++++++++++++++++ |                         |+++++++++++++++++++++++++++");
             Console.WriteLine("+++++++++++++++++++++++++ |                         |+++++++++++++++++++++++++++");
             Console.WriteLine("++++++++++++++++++++++++++|_________________________|+++++++++++++++++++++++++++");
             Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            
         }
 
         public void DisplayMenu()

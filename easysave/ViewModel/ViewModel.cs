@@ -13,5 +13,13 @@ namespace easysave.ViewModel
         private View view;
         private Model model;
 
+        public  ViewModel()
+        {
+            model = new Model();
+            view = new View();
+            view.Welcome(); //Function call of welcome Menu
+            //model.UserCHoice = Menu(); //Function call
+
+        }
     }
 }
