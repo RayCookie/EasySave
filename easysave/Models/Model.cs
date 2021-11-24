@@ -4,6 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace easysave.Models
 {
@@ -28,7 +29,6 @@ namespace easysave.Models
         public string stateFile = System.Environment.CurrentDirectory + @"\\";
         public string SourceDir { get; set; }
         public string TargetDir { get; set; }
-        public long TotalSize { get; set; }
         public Model()
         {
             userMenuInput =  " ";
@@ -46,9 +46,33 @@ namespace easysave.Models
             stateFile += @"state.json"; //Create a JSON file
 
         }
-
+        private bool eligible(FileInfo el, DirectoryInfo dest,DirectoryInfo source)
+        {
+            if (File.Exists(el.FullName.Replace(source.FullName, dest.FullName)))
+            {
+                using (var sourcef = File.OpenRead(el.FullName))
+                {
+                    //on ouvre le fichier destination
+                    using (var destinationf = File.OpenRead(el.FullName.Replace(source.FullName, dest.FullName)))
+                    {
+                        var hash1 = BitConverter.ToString(MD5.Create().ComputeHash(sourcef));//on hash le contenu du fichier source
+                        var hash2 = BitConverter.ToString(MD5.Create().ComputeHash(destinationf));//on hash le contenu du fichier destination
+                                                                                                  //si le hash est le meme on saute a l'itération suivante sans faire de sauvegarde
+                        if (hash1 == hash2)
+                        {
+                            return false;
+                        };
+                    }
+                }
+            }
+            return false;
+        }
         public void DifferentialSave(string pathA, string pathB, string pathC) // Function that allows you to make a differential backup
         {
+            //a = source
+            //b=dest
+            //c = mirroir
+            if (File.Exists(pathA)) throw new Exception("source doesn't exist !!");
             DataState = new DataState(NameStateFile); //Instattation of the method
             Stopwatch stopwatch = new Stopwatch(); // Instattation of the stopwatch method
             stopwatch.Start(); //Starting the stopwatch
@@ -57,60 +81,66 @@ namespace easysave.Models
             DataState.TotalFileSize = 0;
             nbfilesmax = 0;
 
-            System.IO.DirectoryInfo dir1 = new System.IO.DirectoryInfo(pathA);
-            System.IO.DirectoryInfo dir2 = new System.IO.DirectoryInfo(pathB);
+            System.IO.DirectoryInfo dirsource = new System.IO.DirectoryInfo(pathA);
+            System.IO.DirectoryInfo dirdest = new System.IO.DirectoryInfo(pathB);
 
             // Take a snapshot of the file system.  
-            IEnumerable<System.IO.FileInfo> list1 = dir1.GetFiles("*.*", System.IO.SearchOption.AllDirectories);
-            IEnumerable<System.IO.FileInfo> list2 = dir2.GetFiles("*.*", System.IO.SearchOption.AllDirectories);
-
-            //A custom file comparer defined below  
-            FileCompare myFileCompare = new FileCompare();
-
-            var queryList1Only = (from file in list1 select file).Except(list2, myFileCompare);
-            size = 0;
-            nbfiles = 0;
-            progs = 0;
-
-            foreach (var v in queryList1Only)
+            FileInfo[] files = (FileInfo[])dirsource.GetFiles("*", SearchOption.AllDirectories).Where(el => eligible(el, dirdest,dirsource)) ;
+            foreach(var file in files)
             {
-                TotalSize += v.Length;
-                nbfilesmax++;
-
+                TotalSize += file.Length;
             }
-
-            //Loop that allows the backup of different files
-            foreach (var v in queryList1Only)
+            nbfilesmax = files.Count();
+            foreach(var file in files)
             {
-                string tempPath = Path.Combine(pathC, v.Name);
-                //Systems which allows to insert the values ​​of each file in the report file.
-                DataState.PathSourceFile = Path.Combine(pathA, v.Name);
-                DataState.PathFileDestination = tempPath;
+                string destfile = file.FullName.Replace(pathA,pathB) ;
+                file.CopyTo(destfile, true);
+                DataState.PathSourceFile = Path.Combine(pathA, file.Name);
+                DataState.PathFileDestination = destfile;
                 DataState.TotalFileSize = nbfilesmax;
                 DataState.TotalNumberFileToCopy = TotalSize;
                 DataState.SizeRemainingFile = TotalSize - size;
                 DataState.NumberFileRemaining = nbfilesmax - nbfiles;
                 DataState.Progression = progs;
-
-                UpdateStatefile();//Call of the function to start the state file system
-                v.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
-                size += v.Length;
-                nbfiles++;
+                UpdateStatefile();
+                stopwatch.Stop(); //Stop the stopwatch
+                this.TimeTransfert = stopwatch.Elapsed;
             }
+            ////A custom file comparer defined below  
+            //FileCompare myFileCompare = new FileCompare();
 
-            //System which allows the values ​​to be reset to 0 at the end of the backup
-            DataState.PathSourceFile = null;
-            DataState.PathSourceFile = null;
-            DataState.TotalNumberFileToCopy = 0;
-            DataState.TotalFileSize = 0;
-            DataState.SizeRemainingFile = 0;
-            DataState.NumberFileRemaining = 0;
-            DataState.Progression = 0;
-            DataState.SaveState = false;
-            UpdateStatefile();//Call of the function to start the state file system
+            //var queryList1Only = (from file in list1 select file).Except(list2, myFileCompare);
+            //size = 0;
+            //nbfiles = 0;
+            //progs = 0;
 
-            stopwatch.Stop(); //Stop the stopwatch
-            this.TimeTransfert = stopwatch.Elapsed; // Transfer of the chrono time to the variable
+            
+            ////Loop that allows the backup of different files
+            //foreach (var v in queryList1Only)
+            //{
+            //    string tempPath = Path.Combine(pathC, v.Name);
+            //    //Systems which allows to insert the values ​​of each file in the report file.
+                
+
+            //    UpdateStatefile();//Call of the function to start the state file system
+            //    v.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+            //    size += v.Length;
+            //    nbfiles++;
+            //}
+
+            ////System which allows the values ​​to be reset to 0 at the end of the backup
+            //DataState.PathSourceFile = null;
+            //DataState.PathSourceFile = null;
+            //DataState.TotalNumberFileToCopy = 0;
+            //DataState.TotalFileSize = 0;
+            //DataState.SizeRemainingFile = 0;
+            //DataState.NumberFileRemaining = 0;
+            //DataState.Progression = 0;
+            //DataState.SaveState = false;
+            //UpdateStatefile();//Call of the function to start the state file system
+
+            //stopwatch.Stop(); //Stop the stopwatch
+            //this.TimeTransfert = stopwatch.Elapsed; // Transfer of the chrono time to the variable
         }
 
          public void AddSave(BackUp backup) //Function that creates a backup job
