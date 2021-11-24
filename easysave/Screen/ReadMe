@@ -3,6 +3,7 @@ Ce fichier sera mis à jour au cours du développement de notre application.
 Dans le but d’un projet scolaire de CESI EXIA, notre équipe composée de de 4 étudiants a conçu « EasySave ».
 Notre équipe vient d'intégrer l'éditeur de logiciels ProSoft. Sous la responsabilité du DSI, on a pour but de gérer et concevoir le projet “EasySave”, ce projet consiste à développer un logiciel de sauvegarde.
 Comme tout logiciel de la Suite ProSoft, notre logiciel « EasySave » s'intégrera à la politique tarifaire suivante :
+
 •	Prix unitaire : 200 €HT
 •	Contrat de maintenance annuel 5/7 8-17h (mises à jour incluses): 12% prix d'achat (Contrat annuel à tacite reconduction avec revalorisation basée sur l'indice SYNTEC)
 
@@ -26,6 +27,7 @@ o	Génération des fichiers journaliers et des fichiers d'état
 o	Utilisation de notre programme par des utilisateurs anglophones et Francophones
 
 Mode d’emplois :
+
 •	Lors du lancement de notre logiciel un affichage du nom de notre logiciel apparaîtra.
 •	L’utilisateur a le choix de langue entre le français et l’anglais.
 •	L’utilisateurs à le choix de créer ou exécuter un travail de sauvegarde.
