@@ -27,8 +27,8 @@ namespace easysave.Models
         public long TotalSize { get; set; }
         public TimeSpan TimeTransfert { get; private set; }
 
-        public string backupListFile = System.Environment.CurrentDirectory + @"\\";
-        public string stateFile = System.Environment.CurrentDirectory + @"\\";
+        public string backupListFile = System.Environment.CurrentDirectory + @"\work\";
+        public string stateFile = System.Environment.CurrentDirectory + @"\state\";
         public string SourceDir { get; set; }
         public string TargetDir { get; set; }
         public Model()
@@ -249,11 +249,11 @@ namespace easysave.Models
 
         }
 
-        BackUp backup = null;
-        //Function
+        
+        
         public void LaunchUniqueSave(string backupname)//launch a unique save function sans lupdate du logFile
         {
-
+            BackUp backup = null;
             string readfile = File.ReadAllText(backupListFile);// Open the path to read from.
             if (readfile.Length != 0)
             {
@@ -270,7 +270,7 @@ namespace easysave.Models
             if (backup.Type == 1)//for complete save
             {
                 NameStateFile = backup.SaveName;
-                //call the complete save function
+                CompleteSave(backup.SourceDir, backup.TargetDir, true, false);//call the complete save function
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
                 Console.WriteLine("complete save for the job chosen is done succesfully");
             }
@@ -299,7 +299,7 @@ namespace easysave.Models
                     if (backup.Type == 1)//for complete save
                     {
                         NameStateFile = backup.SaveName;
-                        //call the complete save function
+                        CompleteSave(backup.SourceDir, backup.TargetDir, true, false);//call the complete save function
                         UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
                         Console.WriteLine("Complete save for all the jobs is done succesfully");
                     }

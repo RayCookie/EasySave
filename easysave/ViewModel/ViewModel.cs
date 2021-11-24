@@ -123,7 +123,7 @@ namespace easysave.ViewModel
                             if (model.checkdatabackup < 5) // Check not to exceed the save limit
                             {
                                 Console.Clear(); //Console cleaning
-                                view.DisplayMenu(); // Calling the function to display the second menu
+                                view.DisplaySubMenu(); // Calling the function to display the second menu
                                 MenuSub(); // Calling the function for the second menu
                             }
                             else
@@ -163,6 +163,7 @@ namespace easysave.ViewModel
                         case 1: //Case 1, creating a full backup job
                             model.Type = 1; //Type declaration for backup
                             view.ShowNameFile(); //Display for backup name
+                            view.ShowFile();
                             model.SaveName = Console.ReadLine(); // Retrieving the name of the backup
                             view.ShowSourcePath(); // Display for folder source
                             model.SourceDir = GetSourceDir(); // Function for checking the folder path
@@ -170,6 +171,8 @@ namespace easysave.ViewModel
                             model.TargetDir = GetTargetDir();  // Function for checking the folder path
                             BackUp backup = new BackUp(model.SaveName, model.SourceDir, model.TargetDir, model.Type, "");
                             model.AddSave(backup); // Calling the function to add a backup job
+                            Console.WriteLine("" +
+                                "successfully created,press enter to go back to Menu");
                             break;
 
                         case 2: //Case 2, creating a differential backup job

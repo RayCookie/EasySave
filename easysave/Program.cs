@@ -12,8 +12,8 @@ namespace easysave
         
         static void Main(string[] args)
         {
-            ViewModel.ViewModel viewModel = new ViewModel.ViewModel();
-            Console.ReadLine();
+            ViewModel.ViewModel viewModel = new ViewModel.ViewModel();//instance object
+            
         }
     }
 }
