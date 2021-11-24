@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
-
+using System.Linq;
 using System.Diagnostics;
+
 namespace easysave.Models
 {
     class Model
     {
+        public int nbfiles { get; set; }
+        public long size { get; set; }
         public DataState DataState { get; set; }
         public string userMenuInput { get; set; }
         private string serializeObj;
-         public string NameStateFile { get; set; }
-        public object JsonConvert { get; private set; }
+        public int nbfilesmax { get; set; }
+        public string NameStateFile { get; set; }
+       
+
+        public string SaveName { get; set; }
+        public float progs { get; set; }
+
+        public long TotalSize { get; set; }
+        public TimeSpan TimeTransfert { get; private set; }
 
         public string backupListFile = System.Environment.CurrentDirectory + @"\\";
         public string stateFile = System.Environment.CurrentDirectory + @"\\";
@@ -35,8 +42,105 @@ namespace easysave.Models
             }
             stateFile += @"state.json"; //Create a JSON file
 
-
         }
+
+        public void DifferentialSave(string pathA, string pathB, string pathC) // Function that allows you to make a differential backup
+        {
+            DataState = new DataState(NameStateFile); //Instattation of the method
+            Stopwatch stopwatch = new Stopwatch(); // Instattation of the stopwatch method
+            stopwatch.Start(); //Starting the stopwatch
+
+            DataState.SaveState = true;
+            DataState.TotalFileSize = 0;
+            nbfilesmax = 0;
+
+            System.IO.DirectoryInfo dir1 = new System.IO.DirectoryInfo(pathA);
+            System.IO.DirectoryInfo dir2 = new System.IO.DirectoryInfo(pathB);
+
+            // Take a snapshot of the file system.  
+            IEnumerable<System.IO.FileInfo> list1 = dir1.GetFiles("*.*", System.IO.SearchOption.AllDirectories);
+            IEnumerable<System.IO.FileInfo> list2 = dir2.GetFiles("*.*", System.IO.SearchOption.AllDirectories);
+
+            //A custom file comparer defined below  
+            FileCompare myFileCompare = new FileCompare();
+
+            var queryList1Only = (from file in list1 select file).Except(list2, myFileCompare);
+            size = 0;
+            nbfiles = 0;
+            progs = 0;
+
+            foreach (var v in queryList1Only)
+            {
+                TotalSize += v.Length;
+                nbfilesmax++;
+
+            }
+
+            //Loop that allows the backup of different files
+            foreach (var v in queryList1Only)
+            {
+                string tempPath = Path.Combine(pathC, v.Name);
+                //Systems which allows to insert the values ​​of each file in the report file.
+                DataState.PathSourceFile = Path.Combine(pathA, v.Name);
+                DataState.PathFileDestination = tempPath;
+                DataState.TotalFileSize = nbfilesmax;
+                DataState.TotalNumberFileToCopy = TotalSize;
+                DataState.SizeRemainingFile = TotalSize - size;
+                DataState.NumberFileRemaining = nbfilesmax - nbfiles;
+                DataState.Progression = progs;
+
+                UpdateStatefile();//Call of the function to start the state file system
+                v.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+                size += v.Length;
+                nbfiles++;
+            }
+
+            //System which allows the values ​​to be reset to 0 at the end of the backup
+            DataState.PathSourceFile = null;
+            DataState.PathSourceFile = null;
+            DataState.TotalNumberFileToCopy = 0;
+            DataState.TotalFileSize = 0;
+            DataState.SizeRemainingFile = 0;
+            DataState.NumberFileRemaining = 0;
+            DataState.Progression = 0;
+            DataState.SaveState = false;
+            UpdateStatefile();//Call of the function to start the state file system
+
+            stopwatch.Stop(); //Stop the stopwatch
+            this.TimeTransfert = stopwatch.Elapsed; // Transfer of the chrono time to the variable
+        }
+
+         public void AddSave(BackUp backup) //Function that creates a backup job
+        {
+            List<BackUp> backupList = new List<BackUp>();
+            this.serializeObj = null; 
+
+            if (!File.Exists(backupListFile)) //Checking if the file exists
+            {
+                File.WriteAllText(backupListFile, this.serializeObj);
+            }
+
+            string jsonString = File.ReadAllText(backupListFile); //Reading the json file
+
+            if (jsonString.Length != 0) //Checking the contents of the json file is empty or not
+            {
+                BackUp[] list = JsonConvert.DeserializeObject<BackUp[]>(jsonString); //Derialization of the json file
+                foreach ( var obj in list) //Loop to add the information in the json
+                {
+                    backupList.Add(obj);
+                }
+            }
+            backupList.Add(backup); //Allows you to prepare the objects for the json filling
+
+            this.serializeObj = JsonConvert.SerializeObject(backupList.ToArray(), Formatting.Indented) + Environment.NewLine; //Serialization for writing to json file
+            File.WriteAllText(backupListFile, this.serializeObj); // Writing to the json file
+
+            DataState = new DataState(this.SaveName); //Class initiation
+
+            DataState.statedate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"); //Adding the time in the variable
+            AddStateFile(); //Call of the function to add the backup in the report file.
+        }
+
 
         public void AddStateFile() //Function that allows you to add a backup job to the report file.
         {
@@ -93,7 +197,7 @@ namespace easysave.Models
                         obj.NumberFileRemaining = this.DataState.NumberFileRemaining;
                         obj.SizeRemainingFile = this.DataState.SizeRemainingFile;
                         obj.Progression = this.DataState.Progression;
-                        obj.statedateate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+                        obj.statedate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
                         obj.SaveState = this.DataState.SaveState;
                     }
 
@@ -123,12 +227,12 @@ namespace easysave.Models
                 {
                     if(obj.saveName == backupname)
                     {
-                        backup = new Backup(obj.saveName, obj.sourceDir, obj.targetDir, obj.type, obj.mirrorDir); 
+                        backup = new BackUp(obj.saveName, obj.sourceDir, obj.targetDir, obj.type, obj.mirrorDir); 
                     }
                 }
 
             }
-            if (backup.type==1)//for complete save
+            if (backup.Type==1)//for complete save
              {
                 
              }
@@ -147,12 +251,12 @@ namespace easysave.Models
                 foreach(var obj in list)
                 {
                     
-                     backup = new Backup(obj.saveName, obj.sourceDir, obj.targetDir, obj.type, obj.mirrorDir); 
+                     backup = new BackUp(obj.saveName, obj.sourceDir, obj.targetDir, obj.type, obj.mirrorDir); 
                     
                 }
 
             }
-            if (backup.type==1)//for complete save
+            if (backup.Type==1)//for complete save
              {
                 
              }

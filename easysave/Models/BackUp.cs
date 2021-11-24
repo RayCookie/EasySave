@@ -14,16 +14,9 @@ namespace easysave.Models
         public string SaveName { get; set; }
         public int Type { get; set; }
         public string MirrorDir { get; set; }
-
+        public BackUp(){}
+      
         public BackUp(string saveName, string sourceDir, string targetDir, int type, string mirrorDir)
-        {
-            SaveName = saveName;
-            SourceDir = sourceDir;
-            TargetDir = targetDir;
-            Type = type;
-            MirrorDir = mirrorDir;
-        }
-        public Backup(string saveName, string sourceDir, string targetDir, int type, string mirrorDir)
         {
             SaveName = saveName;
             SourceDir = sourceDir;
