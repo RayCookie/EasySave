@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using easysave.ViewModel;
-using easysave.Model;
+
 
 namespace easysave.view
 {
@@ -19,6 +16,28 @@ namespace easysave.view
             Console.WriteLine("|_____| /_/   |_| /_____/  /_/          /_____/ /_/   |_| |___/     |_____|");
         }
         //Display on the console the menu
+        public void Language()
+        {
+            Console.WriteLine("++++++++++++++++++++++++++++++++______________++++++++++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++++____|              |_____++++++++++++++++++++++++++++");
+            Console.WriteLine("++++++++++++++++++++++++++|                         |+++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++ |           Language      |+++++++++++++++++++++++++++");
+            Console.WriteLine(" _________________________|                         | _________________________");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                     1 +------english/englais-----+----+                      |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                     2 +------franch/français-----+-----+                     |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|_________________________                               _____________________ |");
+            Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
+            Console.WriteLine("+++++++++++++++++++++++++ |    Entrez un chiffre        |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|    Please enter a number    |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|_____________________________|");
+        }
         public void ShowMenu()
         {
             Console.WriteLine("++++++++++++++++++++++++++++++++______________++++++++++++++++++++++++++++++++++");
@@ -40,6 +59,29 @@ namespace easysave.view
             Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
             Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
             Console.WriteLine("++++++++++++++++++++++++++|    Please enter a number    |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|_____________________________|");
+        }
+        public void montereMenu()
+        {
+            Console.WriteLine("++++++++++++++++++++++++++++++++______________++++++++++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++++____|              |_____++++++++++++++++++++++++++++");
+            Console.WriteLine("++++++++++++++++++++++++++|                         |+++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++ |           Menu          |+++++++++++++++++++++++++++");
+            Console.WriteLine(" _________________________|                         | _________________________");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                     0 +-------------quitter--------+----------+              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                     1 +------Executer un travail-----+----+                  |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|                     2 +------creer un travail-----+-----+                    |");
+            Console.WriteLine("|                                                                              |");
+            Console.WriteLine("|_________________________                               _____________________ |");
+            Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
+            Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|    choisisser un numéro     |++++++++++++++++++++++|");
             Console.WriteLine("++++++++++++++++++++++++++|_____________________________|");
         }
         //Display on the console the menu of backup jobs
@@ -73,6 +115,13 @@ namespace easysave.view
             Console.WriteLine("|                                                        |");
             Console.WriteLine("|Please enter the Name of the folder you want to back up.|");
             Console.WriteLine("|                                                        |");
+        }
+        public void VoirName()
+        {
+            Console.WriteLine("+--------------------------------------------------------------+");
+            Console.WriteLine("|                                                              |");
+            Console.WriteLine("|Veuillez entrer le Nom du dossier que vous voulez sauvegarder.|");
+            Console.WriteLine("|                                                              |");
         }
         //Display on the console when you have to enter the path of the folder that you want to back up
         public void ShowSourceDir()
@@ -145,6 +194,103 @@ namespace easysave.view
             Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
             Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
             Console.WriteLine("++++++++++++++++++++++++++|    Please enter a number    |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|_____________________________|");
+
+        }
+        public void VoirSubMenu()
+        {
+            Console.WriteLine("+++++++++++++++++++++++++++++++++______________+++++++++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++++_____|              |_____+++++++++++++++++++++++++++");
+            Console.WriteLine("++++++++++++++++++++++++++|                          |++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++ |    Travaux de Sauvegarde |++++++++++++++++++++++++++");
+            Console.WriteLine(" _________________________|                          | _________________________");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                     0 +------------Sortir--------+--------+                     |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                     1 +--------Sauvegarde Complete--------+----+                    |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                     2 +------Sauvegarde Differentielle-----+----+                     |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|_________________________                               ______________________ |");
+            Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
+            Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|    Entrez un chiffre        |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|_____________________________|");
+        }
+
+
+        public void VoirSourceRoute()
+        {
+            Console.WriteLine("+--------------------------------------------------------+");
+            Console.WriteLine("|                                                        |");
+            Console.WriteLine("|Veuillez entrer le chemin du dossier que vous voulez sauvegarder.|");
+            Console.WriteLine("|                                                        |");
+            Console.WriteLine("+ ---------+---------------------------------------------+");
+        }
+
+
+
+
+        public void VoirTargetRoute()
+        {
+            Console.WriteLine("+-------------------------------------------------+");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|Veuillez entrer le chemin de destination de la sauvegarde.|");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("+ ---------+--------------------------------------+");
+        }
+
+
+        public void VoirMirrorRoute()
+        {
+            Console.WriteLine("+-------------------------------------------------------------+");
+            Console.WriteLine("|                                                             |");
+            Console.WriteLine("|Veuillez entrer le chemin du dossier de la sauvegarde miroir.|");
+            Console.WriteLine("|                                                             |");
+            Console.WriteLine("+ ---------+--------------------------------------------------+");
+        }
+
+        public void VoirFile()
+        {
+            Console.WriteLine("+-------------------------------------+");
+            Console.WriteLine("|                                           |");
+            Console.WriteLine("|Veuillez entrer le nom de votre sauvegarde.|");
+            Console.WriteLine("|                                           |");
+            Console.WriteLine("+ ---------+--------------------------------+");
+        }
+
+        public void VoirNameFile()
+        {
+            Console.Clear();
+            Console.WriteLine("+-------------------------------------+");
+            Console.WriteLine("|                                     |");
+            Console.WriteLine("|Les noms de vos traveaux de sauvegarde.  |");
+            Console.WriteLine("|                                     |");
+            Console.WriteLine("+ ---------+--------------------------+");
+        }
+        public void voirLaunchType()
+        {
+            Console.WriteLine("+++++++++++++++++++++++++++++++++______________+++++++++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++++_____|              |_____+++++++++++++++++++++++++++");
+            Console.WriteLine("++++++++++++++++++++++++++|                          |++++++++++++++++++++++++++");
+            Console.WriteLine("+++++++++++++++++++++++++ |   Traveaux de sauvegarde |++++++++++++++++++++++++++");
+            Console.WriteLine(" _________________________|                          | _________________________");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                     1 +--------Sauvegarde unique--------+----+                |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|                     2 +------Sauvegarde séquentiel-----+----+                 |");
+            Console.WriteLine("|                                                                               |");
+            Console.WriteLine("|_________________________                               ______________________ |");
+            Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
+            Console.WriteLine("+++++++++++++++++++++++++ |                             |++++++++++++++++++++++|");
+            Console.WriteLine("++++++++++++++++++++++++++|    Entrez un chiffre        |++++++++++++++++++++++|");
             Console.WriteLine("++++++++++++++++++++++++++|_____________________________|");
 
         }

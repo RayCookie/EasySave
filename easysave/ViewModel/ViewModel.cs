@@ -7,18 +7,22 @@ using Newtonsoft.Json;
 
 namespace easysave.ViewModel
 {
-    class ViewModel
+    class viewmodel
     {
         private model model;
         private View view;
         private int inputMenu;
+        public int language;
 
-        public ViewModel()
+        public viewmodel()
         {
             model = new model();
             view = new View();
             view.ShowStart(); //Function call
-            model.userMenuInput = Menu(); //Function call
+            
+           model.userMenuInput = Menu(); //Function call
+            
+            
 
         }
 
@@ -36,7 +40,15 @@ namespace easysave.ViewModel
                 }
                 else
                 {
-                    view.ErrorMenu("Incorect Path"); //Show error message
+                    if(language==1)
+                    {
+                        view.ErrorMenu("Incorect Path"); //Show error message
+                    }
+                    else
+                    {
+                        view.ErrorMenu("route incorecte"); //Show error message
+                    }
+                   
                 }
 
             }
@@ -93,55 +105,116 @@ namespace easysave.ViewModel
                 model.CheckDataFile(); // Calling the function to check the number of backups
                 try
                 {
-                    view.ShowMenu(); //Calling the function to display the menu
-                    inputMenu = int.Parse(Console.ReadLine()); //Retrieving user input for menu
-                    switch (inputMenu) // Switch of menu
+                    view.Language();
+                    int inputLanguageType = int.Parse(Console.ReadLine());
+                    language = inputLanguageType;
+                    if (inputLanguageType == 1)
                     {
-                        case 0:
-                            Environment.Exit(0); //Stop the programs
-                            break;
-                        case 1:
-                            view.ShowNameFile(); //Display message introduction on the backup names
+                        Console.Clear();
+                        view.ShowMenu(); //Calling the function to display the menu
+                        inputMenu = int.Parse(Console.ReadLine()); //Retrieving user input for menu
+                        switch (inputMenu) // Switch of menu
+                        {
+                            case 0:
+                                Environment.Exit(0); //Stop the programs
+                                break;
+                            case 1:
+                                view.ShowNameFile(); //Display message introduction on the backup names
 
-                            string jsonString = File.ReadAllText(model.backupListFile); //Function to read json file
-                            Backup[] list = JsonConvert.DeserializeObject<Backup[]>(jsonString); // Function to dezerialize the json file
+                                string jsonString = File.ReadAllText(model.backupListFile); //Function to read json file
+                                Backup[] list = JsonConvert.DeserializeObject<Backup[]>(jsonString); // Function to dezerialize the json file
 
-                            foreach (var obj in list) //Loop to display the names of the backups
-                            {
-                                Console.WriteLine(" - " + obj.SaveName); //Display of backup names
-                            }
+                                foreach (var obj in list) //Loop to display the names of the backups
+                                {
+                                    Console.WriteLine(" - " + obj.SaveName); //Display of backup names
+                                }
 
 
-                            view.showLaunchType();
-                            int inputLanchType = int.Parse(Console.ReadLine());
-                            if (inputLanchType == 1)
-                            {
-                                view.ShowFile();//Calling the function to display the names of the backups
-                                string inputnamebackup = Console.ReadLine(); // Recovering backup names
-                                model.LoadUniqueSave(inputnamebackup); // Calling the function to start the backup
-                            }
-                            else
-                            {
-                                model.LaunchSequentialSave();
-                            }
-                            break;
+                                view.showLaunchType();
+                                int inputLanchType = int.Parse(Console.ReadLine());
+                                if (inputLanchType == 1)
+                                {
+                                    view.ShowFile();//Calling the function to display the names of the backups
+                                    string inputnamebackup = Console.ReadLine(); // Recovering backup names
+                                    model.LoadUniqueSave(inputnamebackup); // Calling the function to start the backup
+                                }
+                                else
+                                {
+                                    model.LaunchSequentialSave();
+                                }
+                                break;
 
-                        case 2:
-                            if (model.checkdatabackup < 5) // Check not to exceed the save limit
-                            {
-                                Console.Clear(); //Console cleaning
-                                view.ShowSubMenu(); // Calling the function to display the second menu
-                                MenuSub(); // Calling the function for the second menu
-                            }
-                            else
-                            {
-                                Console.Clear(); //Console cleaning
-                                view.ErrorMenu("You already have 5 backups to create."); // Show Error Message
-                            }
+                            case 2:
+                                if (model.checkdatabackup < 5) // Check not to exceed the save limit
+                                {
+                                    Console.Clear(); //Console cleaning
+                                    view.ShowSubMenu(); // Calling the function to display the second menu
+                                    MenuSub(); // Calling the function for the second menu
+                                }
+                                else
+                                {
+                                    Console.Clear(); //Console cleaning
+                                    view.ErrorMenu("You already have 5 backups to create."); // Show Error Message
+                                }
 
-                            break;
+                                break;
+                        }
+
                     }
+                    else
+                    {
+                        
+                        Console.Clear();
+                        view.montereMenu(); //Calling the function to display the menu
+                        inputMenu = int.Parse(Console.ReadLine()); //Retrieving user input for menu
+                        switch (inputMenu) // Switch of menu
+                        {
+                            case 0:
+                                Environment.Exit(0); //Stop the programs
+                                break;
+                            case 1:
+                                view.VoirNameFile(); //Display message introduction on the backup names
 
+                                string jsonString = File.ReadAllText(model.backupListFile); //Function to read json file
+                                Backup[] list = JsonConvert.DeserializeObject<Backup[]>(jsonString); // Function to dezerialize the json file
+
+                                foreach (var obj in list) //Loop to display the names of the backups
+                                {
+                                    Console.WriteLine(" - " + obj.SaveName); //Display of backup names
+                                }
+
+
+                                view.voirLaunchType();
+                                int inputLanchType = int.Parse(Console.ReadLine());
+                                if (inputLanchType == 1)
+                                {
+                                    view.VoirFile();//Calling the function to display the names of the backups
+                                    string inputnamebackup = Console.ReadLine(); // Recovering backup names
+                                    model.LoadUniqueSave(inputnamebackup); // Calling the function to start the backup
+                                }
+                                else
+                                {
+                                    model.LaunchSequentialSave();
+                                }
+                                break;
+
+                            case 2:
+                                if (model.checkdatabackup < 5) // Check not to exceed the save limit
+                                {
+                                    Console.Clear(); //Console cleaning
+                                    view.VoirSubMenu(); // Calling the function to display the second menu
+                                    MenuSub(); // Calling the function for the second menu
+                                }
+                                else
+                                {
+                                    Console.Clear(); //Console cleaning
+                                    view.ErrorMenu("You already have 5 backups to create."); // Show Error Message
+                                }
+
+                                break;
+                        }
+
+                    }
                 }
                 catch
                 {
@@ -169,11 +242,11 @@ namespace easysave.ViewModel
                             break;
                         case 1: //Case 1, creating a full backup job
                             model.Type = 1; //Type declaration for backup
-                            view.ShowName(); //Display for backup name
+                            view.VoirName(); ; //Display for backup name
                             model.SaveName = Console.ReadLine(); // Retrieving the name of the backup
-                            view.ShowSourceDir(); // Display for folder source
+                            view.VoirSourceRoute(); // Display for folder source
                             model.SourceDir = GetSourceDir(); // Function for checking the folder path
-                            view.ShowTargetDir(); // Display for the folder destination
+                            view.VoirTargetRoute(); // Display for the folder destination
                             model.TargetDir = GetTargetDir();  // Function for checking the folder path
                             Backup backup = new Backup(model.SaveName, model.SourceDir, model.TargetDir, model.Type, "");
                             model.AddSave(backup); // Calling the function to add a backup job
@@ -182,16 +255,17 @@ namespace easysave.ViewModel
 
                         case 2: //Case 2, creating a differential backup job
                             model.Type = 2; //Type declaration for backup
-                            view.ShowName();
+                            view.VoirName();
                             model.SaveName = Console.ReadLine();
-                            view.ShowSourceDir();
+                            view.VoirSourceRoute();
                             model.SourceDir = GetSourceDir();
-                            view.ShowMirrorDir();
+                            view.VoirMirrorRoute();
                             model.MirrorDir = GetMirrorDir();
-                            view.ShowTargetDir();
+                            view.VoirTargetRoute();
                             model.TargetDir = GetTargetDir();
                             Backup backup2 = new Backup(model.SaveName, model.SourceDir, model.TargetDir, model.Type, model.MirrorDir);
                             model.AddSave(backup2); // Calling the function to add a backup job
+                            Console.WriteLine("added with success ,press enter to go back to principal Menu");
                             break;
                     }
 

@@ -6,3 +6,19 @@
   "TransactionTime": "00:00:00.01",
   "TotalSize": 0
 }
+{
+  "SourceDir": "C:\\source2",
+  "TargetDir": "C:\\Users\\TRETEC\\Desktop\\destination",
+  "SaveName": "test55",
+  "BackupDate": "25/11/2021 01:49:42",
+  "TransactionTime": "00:00:00.10",
+  "TotalSize": 0
+}
+{
+  "SourceDir": "C:\\source2",
+  "TargetDir": "C:\\Users\\TRETEC\\Desktop\\destination",
+  "SaveName": "test77",
+  "BackupDate": "25/11/2021 01:49:42",
+  "TransactionTime": "00:00:00.00",
+  "TotalSize": 0
+}

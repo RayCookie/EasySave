@@ -5,16 +5,19 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Diagnostics;
 
+
 namespace easysave.Model
 {
     class model
     {
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         //Declaration of all variables and properties
+       
         public int checkdatabackup;
         private string serializeObj;
         public string backupListFile = System.Environment.CurrentDirectory + @"\Works\";
         public string stateFile = System.Environment.CurrentDirectory + @"\State\";
+      
         public DataState DataState { get; set; }
         public string NameStateFile { get; set; }
         public string BackupNameState { get; set; }
@@ -36,6 +39,7 @@ namespace easysave.Model
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         public model()
         {
+            
             userMenuInput = " ";
 
             if (!Directory.Exists(backupListFile)) //Check if the folder is created
@@ -64,7 +68,15 @@ namespace easysave.Model
 
             if (!dir.Exists) //Check if the file is present
             {
-                throw new DirectoryNotFoundException("ERROR 404 : Directory Not Found ! " + inputpathsave);
+                //if (viewmodel.language == 1)
+                //{
+                    throw new DirectoryNotFoundException("ERROR 404 : Directory Not Found ! " + inputpathsave);
+                //}
+                //else
+                //{
+                  //  throw new DirectoryNotFoundException("ERROR 404 : Dossier introuvable ! " + inputpathsave);
+                //}
+                
             }
 
             DirectoryInfo[] dirs = dir.GetDirectories();
@@ -368,14 +380,29 @@ namespace easysave.Model
                 NameStateFile = backup.SaveName;
                 CompleteSave(backup.SourceDir, backup.TargetDir, true, false); //Calling the function to run the full backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-                Console.WriteLine("Saved Successfull !"); //Satisfaction message display
+               // if(viewmodel.language ==1)
+               // {
+                    Console.WriteLine("Saved Successfull !"); //Satisfaction message display
+               // }
+                //else
+                //{
+               //     Console.WriteLine("Sauvegarder avec succée"); //Satisfaction message display
+                //}
+                
             }
             else //If this is the wrong guy then, it means it's a differential backup
             {
                 NameStateFile = backup.SaveName;
                 DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir); //Calling the function to start the differential backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-                Console.WriteLine("Saved Successfull !"); //Satisfaction message display
+               // if (viewmodel.language == 1)
+               // {
+                    Console.WriteLine("Saved Successfull !"); //Satisfaction message display
+               // }
+               // else
+              //  {
+              //      Console.WriteLine("Sauvegarder avec succée"); //Satisfaction message display
+              //  }
             }
 
         }
@@ -397,14 +424,30 @@ namespace easysave.Model
                         NameStateFile = backup.SaveName;
                         CompleteSave(backup.SourceDir, backup.TargetDir, true, false);//call the complete save function
                         UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
-                        Console.WriteLine("Complete save for job  " + backup.SaveName + " is done succesfully");
+                       // if (viewmodel.language == 1)
+                     ///   {
+                            Console.WriteLine("Complete save for job  " + backup.SaveName + " is done succesfully");
+                      //  }
+                      //  else
+                      //  {
+                      //      Console.WriteLine("Sauvegarde complete  " + backup.SaveName + " faite avec succée");
+                      //  }
+                        
                     }
                     else //for differential save*
                     {
                         NameStateFile = backup.SaveName;
                         DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir);//call the DifferentialSave function
                         UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
-                        Console.WriteLine("differntial save for job " + backup.SaveName + " is done succesfully");
+                     //   if (viewmodel.language == 1)
+                      //  {
+                            Console.WriteLine("differntial save for job " + backup.SaveName + " is done succesfully");
+                       // }
+                       // else
+                      //  {
+                      //      Console.WriteLine("Sauvegarde differential  " + backup.SaveName + " faite avec succée");
+                      //  }
+                        
                     }
                 }
 

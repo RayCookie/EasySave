@@ -12,7 +12,7 @@ namespace easysave
         
         static void Main(string[] args)
         {
-            ViewModel.ViewModel viewModel = new ViewModel.ViewModel();//instance object
+            viewmodel viewModel = new viewmodel();//instance object
             
         }
     }
