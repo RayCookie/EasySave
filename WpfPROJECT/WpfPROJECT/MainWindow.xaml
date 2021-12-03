@@ -14,17 +14,39 @@
         <TextBox x:Name="tName" HorizontalAlignment="Left" Margin="142,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
         <TextBox x:Name="tSource" HorizontalAlignment="Left" Margin="142,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
         <TextBox x:Name="tDestination" HorizontalAlignment="Left" Margin="142,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="30"/>
-        <Button Content="create" HorizontalAlignment="Left" Margin="315,93,0,0" VerticalAlignment="Top" Height="55" Width="104" Click="Button_Click" Grid.Column="1"/>
-        <TextBox x:Name="result" HorizontalAlignment="Left" Margin="285,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="130" Grid.Column="1"/>
-        <Label Content="Nom" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label Content="Source" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label Content="Destination&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox x:Name="tMirror" HorizontalAlignment="Left" Margin="160,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
-        <Label Content="Mirror" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="95"/>
-        <ListBox x:Name="listName" Margin="30,375,72,43" Height="176" Width="192" SelectionMode="Multiple" />
-        <Button Content="Execute&#xD;&#xA;" HorizontalAlignment="Left" Margin="376,407,0,0" VerticalAlignment="Top" Height="56" Width="92" Click="Button_Click_1" Grid.Column="1"/>
-        <RadioButton x:Name="Complete_Save_Button" Content="complete save" HorizontalAlignment="Left" Margin="56,65,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <RadioButton x:Name="diff_button" Content="Differentiel save" HorizontalAlignment="Left" Margin="56,120,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="315,93,0,0" VerticalAlignment="Top" Height="55" Width="104" Click="Button_Click" Grid.Column="1"/>
+        <TextBox x:Name="tMirror" HorizontalAlignment="Left" Margin="142,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
+        <ListBox x:Name="listName" Margin="100,367,28,0" Height="176" Width="192" SelectionMode="Multiple" />
+        <Button Content="" HorizontalAlignment="Center" Margin="0,407,0,0" VerticalAlignment="Top" Height="56" Width="112" Click="Button_Click_1" Grid.Column="1" RenderTransformOrigin="-0.108,0.558"/>
+        <RadioButton x:Name="Complete_Save_Button" Content="" HorizontalAlignment="Left" Margin="56,65,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <RadioButton x:Name="diff_button" Content="" HorizontalAlignment="Left" Margin="56,120,0,0" VerticalAlignment="Top" Grid.Column="1" />
+        <Button x:Name="english_Button" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="62" Width="95" Click="Button_Click_2"/>
+        <Button x:Name="french_button" Content="" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Height="62" Width="99" Click="french_button_Click"/>
+        <TextBlock x:Name="lName1" HorizontalAlignment="Left" Margin="33,96,0,0" Text="Nom" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="49"/>
+        <TextBlock x:Name="lSource1" HorizontalAlignment="Left" Margin="33,156,0,0" Text="Source" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="51"/>
+        <TextBlock x:Name="ldestination" HorizontalAlignment="Left" Margin="20,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="85" Text="Destination"/>
+        <TextBlock x:Name="lMirror1" HorizontalAlignment="Left" Margin="16,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="85" Text="Mirror"/>
+        <TextBlock x:Name="lLIST1" HorizontalAlignment="Left" Margin="6,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="99" Text="LIST OF Back Up"/>
+        <TextBlock x:Name="lCreate1" Grid.Column="1" HorizontalAlignment="Left" Margin="340,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="54" Text="Create"/>
+        <TextBlock x:Name="lComplete1" Grid.Column="1" HorizontalAlignment="Left" Margin="89,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="132" Text="complete save" RenderTransformOrigin="0.535,0.567">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.833"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="lDifferentiel1" Grid.Column="1" HorizontalAlignment="Left" Margin="89,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="127" Text="differentiel save" RenderTransformOrigin="0.571,0.79"/>
+        <TextBlock x:Name="lEnglish1" HorizontalAlignment="Left" Margin="33,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="15" Width="49" Text="ENGLISH"/>
+        <TextBlock x:Name="lFrensh1" HorizontalAlignment="Left" Margin="160,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="57" Text="FRENSH"/>
+        <TextBlock x:Name="lexecute" Grid.Column="1" HorizontalAlignment="Center" Margin="0,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="54" Text="excute"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="267,158,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="57" Click="Button_Click_3"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="267,236,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="57" Click="Button_Click_4"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="267,308,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="57" Click="Button_Click_5"/>
+        <Button x:Name="french_button_Copy" Content="" HorizontalAlignment="Left" Margin="267,12,0,0" VerticalAlignment="Top" Height="62" Width="99" Click="french_button_Click" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="lextention" HorizontalAlignment="Left" Margin="288,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="57" Text="extention" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

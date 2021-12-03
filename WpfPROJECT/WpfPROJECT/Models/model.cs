@@ -374,14 +374,9 @@ namespace WpfPROJECT.Models
                 NameStateFile = backup.SaveName;
                 CompleteSave(backup.SourceDir, backup.TargetDir, true, false); //Calling the function to run the full backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-                                                                                    // if(viewmodel.language ==1)
-                                                                                    // {
-                Console.WriteLine("Saved Successfull !"); //Satisfaction message display
-                                                          // }
-                                                          //else
-                                                          //{
-                                                          //     Console.WriteLine("Sauvegarder avec succée"); //Satisfaction message display
-                                                          //}
+                                                                                    
+                
+                                                          
 
             }
             else //If this is the wrong guy then, it means it's a differential backup
@@ -389,14 +384,7 @@ namespace WpfPROJECT.Models
                 NameStateFile = backup.SaveName;
                 DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir); //Calling the function to start the differential backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-                                                                                    // if (viewmodel.language == 1)
-                                                                                    // {
-                Console.WriteLine("Saved Successfull !"); //Satisfaction message display
-                                                          // }
-                                                          // else
-                                                          //  {
-                                                          //      Console.WriteLine("Sauvegarder avec succée"); //Satisfaction message display
-                                                          //  }
+      
             }
 
         }
@@ -417,31 +405,14 @@ namespace WpfPROJECT.Models
                     {
                         NameStateFile = backup.SaveName;
                         CompleteSave(backup.SourceDir, backup.TargetDir, true, false);//call the complete save function
-                        UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
-                                                                                           // if (viewmodel.language == 1)
-                        ///   {
-                        Console.WriteLine("Complete save for job  " + backup.SaveName + " is done succesfully");
-                        //  }
-                        //  else
-                        //  {
-                        //      Console.WriteLine("Sauvegarde complete  " + backup.SaveName + " faite avec succée");
-                        //  }
-
+                        UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function                                                                                         
                     }
                     else //for differential save*
                     {
                         NameStateFile = backup.SaveName;
                         DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir);//call the DifferentialSave function
                         UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
-                                                                                           //   if (viewmodel.language == 1)
-                                                                                           //  {
-                        Console.WriteLine("differntial save for job " + backup.SaveName + " is done succesfully");
-                        // }
-                        // else
-                        //  {
-                        //      Console.WriteLine("Sauvegarde differential  " + backup.SaveName + " faite avec succée");
-                        //  }
-
+                                                                                          
                     }
                 }
 
