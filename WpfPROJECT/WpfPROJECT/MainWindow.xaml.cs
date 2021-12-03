@@ -245,5 +245,10 @@ namespace WpfPROJECT
                 tMirror.Text = dialog.FileName; //Displays the path in the window text.
             }
         }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+           Process.Start("notepad.exe", @"..\..\..\Ressources\CryptExtension.json");
+        }
     }
 }

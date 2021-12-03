@@ -45,8 +45,7 @@
         <Button Content="..." HorizontalAlignment="Left" Margin="267,158,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="57" Click="Button_Click_3"/>
         <Button Content="..." HorizontalAlignment="Left" Margin="267,236,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="57" Click="Button_Click_4"/>
         <Button Content="..." HorizontalAlignment="Left" Margin="267,308,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="57" Click="Button_Click_5"/>
-        <Button x:Name="french_button_Copy" Content="" HorizontalAlignment="Left" Margin="267,12,0,0" VerticalAlignment="Top" Height="62" Width="99" Click="french_button_Click" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="lextention" HorizontalAlignment="Left" Margin="288,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="57" Text="extention" Grid.ColumnSpan="2"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="262,10,0,0" VerticalAlignment="Top" Height="63" Width="68" Click="Button_Click_6" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
