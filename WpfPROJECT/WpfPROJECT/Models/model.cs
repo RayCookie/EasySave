@@ -67,14 +67,9 @@ namespace WpfPROJECT.Models
 
             if (!dir.Exists) //Check if the file is present
             {
-                //if (viewmodel.language == 1)
-                //{
+                
                 throw new DirectoryNotFoundException("ERROR 404 : Directory Not Found ! " + inputpathsave);
-                //}
-                //else
-                //{
-                //  throw new DirectoryNotFoundException("ERROR 404 : Dossier introuvable ! " + inputpathsave);
-                //}
+                
 
             }
 
@@ -467,6 +462,31 @@ namespace WpfPROJECT.Models
                     checkdatabackup = list.Length; //Allows to count the number of backups
                 }
             }
+        }
+        public List<Backup> NameList()//Function that lets you know the names of the backups.
+        {
+            List<Backup> backupList = new List<Backup>();
+
+            if (!File.Exists(backupListFile)) //Checking if the file exists
+            {
+                File.WriteAllText(backupListFile, this.serializeObj);
+            }
+
+            List<Backup> names = new List<Backup>();
+            string jsonString = File.ReadAllText(backupListFile); //Function to read json file
+            Backup[] list = JsonConvert.DeserializeObject<Backup[]>(jsonString); // Function to dezerialize the json file
+
+            if(jsonString.Length != 0)
+            {
+                foreach (var obj in list) //Loop to display the names of the backups
+                {
+                    names.Add(obj);
+                }
+
+            }
+
+            return names;
+
         }
 
     }

@@ -26,32 +26,83 @@ namespace WpfPROJECT
         {
             InitializeComponent();
             viewmodel = new viewmodel();
+            ShowListBox();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)//add work button
         {
             string saveName = "";
             string sourceDir = "";
             string targetDir = "";
-            //string mirrorDir = "";
+            string mirrorDir = "";
+
 
             saveName = tName.Text;
             sourceDir = tSource.Text;
             targetDir = tDestination.Text;
-            if (tName.Text.Length.Equals(0) || tSource.Text.Length.Equals(0) || tDestination.Text.Length.Equals(0))
+            if (Complete_Save_Button.IsChecked.Value)//If the button of the full backup is selected
             {
+                if (tName.Text.Length.Equals(0) || tSource.Text.Length.Equals(0) || tDestination.Text.Length.Equals(0))
+                {
 
 
-                result.Text = " Please complete all fields !  ";
+                    result.Text = " Please complete all fields !  ";
+                }
+                else
+                {
+                    int type = 1;
+                    viewmodel.MenuSub(saveName, sourceDir, targetDir, type, "");
+                    result.Text = "Complete BACKUP Added! ";
+                    ShowListBox();
+                }
+            }
+            else if (diff_button.IsChecked.Value)//If the button of the differentiel backup is selected
+            {
+                if (tName.Text.Length.Equals(0) || tSource.Text.Length.Equals(0) || tDestination.Text.Length.Equals(0) || tMirror.Text.Length.Equals(0))
+                {
+
+
+                    result.Text = " Please complete all fields !  ";
+                }
+                else
+                {
+                    int type = 2;
+                    mirrorDir = tMirror.Text;
+                    viewmodel.MenuSub(saveName, sourceDir, targetDir, type, mirrorDir);
+                    result.Text = "Differentiel BACKUP Added! ";
+                    ShowListBox();
+                }
+            }
+
+
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)//excute work button
+        {
+            if (listName.SelectedItem != null)
+            {
+                foreach (string filename in listName.SelectedItems)
+                {
+                    viewmodel.loadSave(filename);
+                    result.Text = " BACKUP SELECTED Saved Succefully! ";
+                }
             }
             else
             {
-                 viewmodel.MenuSub(saveName, sourceDir, targetDir, 1, "");
-                result.Text = " BACKUP Added! ";
+                result.Text = " please add or select a name in the list ";
             }
-           
         }
+        private void ShowListBox() //Function that displays the names of the backups in the list.
+        {
 
-        
+            listName.Items.Clear();
+
+            List<string> names = viewmodel.ListBackup();
+            foreach(string name in names)
+            {
+                listName.Items.Add(name);
+            }
+        }
     }
 }

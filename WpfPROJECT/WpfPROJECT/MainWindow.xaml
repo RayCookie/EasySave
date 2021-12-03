@@ -5,14 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPROJECT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FFCBCBCB">
-        <TextBox x:Name="tType" HorizontalAlignment="Left" Margin="82,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="28"/>
-        <TextBox x:Name="tName" HorizontalAlignment="Left" Margin="82,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
-        <TextBox x:Name="tSource" HorizontalAlignment="Left" Margin="82,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
-        <TextBox x:Name="tDestination" HorizontalAlignment="Left" Margin="82,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
-        <Button Content="create" HorizontalAlignment="Left" Margin="82,316,0,0" VerticalAlignment="Top" Height="55" Width="104" Click="Button_Click"/>
-        <TextBox x:Name="result" HorizontalAlignment="Left" Margin="373,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Height="52"/>
+        Title="MainWindow" Height="500" Width="950">
+    <Grid Background="#FFCBCBCB" Margin="0,0,-123,-59">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320*"/>
+            <ColumnDefinition Width="753*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="tName" HorizontalAlignment="Left" Margin="142,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
+        <TextBox x:Name="tSource" HorizontalAlignment="Left" Margin="142,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
+        <TextBox x:Name="tDestination" HorizontalAlignment="Left" Margin="142,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="30"/>
+        <Button Content="create" HorizontalAlignment="Left" Margin="315,93,0,0" VerticalAlignment="Top" Height="55" Width="104" Click="Button_Click" Grid.Column="1"/>
+        <TextBox x:Name="result" HorizontalAlignment="Left" Margin="285,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="130" Grid.Column="1"/>
+        <Label Content="Nom" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label Content="Destination&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="95"/>
+        <TextBox x:Name="tMirror" HorizontalAlignment="Left" Margin="160,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
+        <Label Content="Mirror" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="95"/>
+        <ListBox x:Name="listName" Margin="30,375,72,43" Height="176" Width="192" SelectionMode="Multiple" />
+        <Button Content="Execute&#xD;&#xA;" HorizontalAlignment="Left" Margin="376,407,0,0" VerticalAlignment="Top" Height="56" Width="92" Click="Button_Click_1" Grid.Column="1"/>
+        <RadioButton x:Name="Complete_Save_Button" Content="complete save" HorizontalAlignment="Left" Margin="56,65,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <RadioButton x:Name="diff_button" Content="Differentiel save" HorizontalAlignment="Left" Margin="56,120,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
     </Grid>
 </Window>
