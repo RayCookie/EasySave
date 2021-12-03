@@ -61,6 +61,7 @@ namespace WpfPROJECT.Models
             DataState = new DataState(NameStateFile);
             this.DataState.SaveState = true;
             Stopwatch stopwatch = new Stopwatch();
+            Stopwatch cryptwatch = new Stopwatch();
             stopwatch.Start(); //Starting the timed for the log file
 
             DirectoryInfo dir = new DirectoryInfo(inputpathsave);  // Get the subdirectories for the specified directory.
@@ -124,7 +125,18 @@ namespace WpfPROJECT.Models
 
                 UpdateStatefile(); //Call of the function to start the state file system
 
-                file.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+
+                if (CryptExt(Path.GetExtension(file.Name)))
+                {
+                    cryptwatch.Start();
+                    Encrypt(DataState.SourceFile, tempPath);
+                    cryptwatch.Stop();
+                }
+                else
+                {
+                    file.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+                }
+                
                 nbfiles++;
                 size += file.Length;
 
@@ -153,13 +165,16 @@ namespace WpfPROJECT.Models
             UpdateStatefile(); //Call of the function to start the state file system
 
             stopwatch.Stop(); //Stop the stopwatch
+            cryptwatch.Stop();
             this.TimeTransfert = stopwatch.Elapsed; // Transfer of the chrono time to the variable
+            //this.CryptTransfert = cryptwatch.Elapsed;
         }
 
         public void DifferentialSave(string pathA, string pathB, string pathC) // Function that allows you to make a differential backup
         {
             DataState = new DataState(NameStateFile); //Instattation of the method
             Stopwatch stopwatch = new Stopwatch(); // Instattation of the method
+            Stopwatch cryptwatch = new Stopwatch();
             stopwatch.Start(); //Starting the stopwatch
 
             DataState.SaveState = true;
@@ -202,6 +217,18 @@ namespace WpfPROJECT.Models
                 DataState.Progress = progs;
 
                 UpdateStatefile();//Call of the function to start the state file system
+
+                if (CryptExt(Path.GetExtension(v.Name)))
+                {
+                    cryptwatch.Start();
+                    Encrypt(DataState.SourceFile, tempPath);
+                    cryptwatch.Stop();
+                }
+                else
+                {
+                    v.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+                }
+
                 v.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
                 size += v.Length;
                 nbfiles++;
@@ -219,7 +246,9 @@ namespace WpfPROJECT.Models
             UpdateStatefile();//Call of the function to start the state file system
 
             stopwatch.Stop(); //Stop the stopwatch
+            cryptwatch.Stop();
             this.TimeTransfert = stopwatch.Elapsed; // Transfer of the chrono time to the variable
+            //this.CryptTransfert = cryptwatch.Elapsed;
         }
 
         private void UpdateStatefile()//Function that updates the status file.
@@ -346,6 +375,44 @@ namespace WpfPROJECT.Models
             File.WriteAllText(stateFile, this.serializeObj);// Writing to the json file
 
 
+        }
+
+        public void Encrypt(string sourceDir, string targetDir)//This function allows you to encrypt files. 
+        {
+            using (Process process = new Process())//Declaration of the process
+            {
+                process.StartInfo.FileName = @"..\..\..\Ressources\CryptoSoft\CryptoSoft.exe"; //Calls the process that is CryptoSoft
+                process.StartInfo.Arguments = String.Format("\"{0}\"", sourceDir) + " " + String.Format("\"{0}\"", targetDir); //Preparation of variables for the process.
+                process.Start(); //Launching the process
+                process.Close();
+
+            }
+
+        }
+        private static string[] getExtensionCrypt()//Function that allows to recover the extensions that the user wants to encrypt in the json file.
+        {
+            using (StreamReader reader = new StreamReader(@"..\..\..\Ressources\CryptExtension.json"))//Function to read the json file
+            {
+                CryptFormat[] item_crypt;
+                string[] crypt_extensions_array;
+                string json = reader.ReadToEnd();
+                List<CryptFormat> items = JsonConvert.DeserializeObject<List<CryptFormat>>(json);
+                item_crypt = items.ToArray();
+                crypt_extensions_array = item_crypt[0].extension_to_crypt.Split(',');
+
+                return crypt_extensions_array; //We return the variables that are stored in an array
+            }
+        }
+        public static bool CryptExt(string extension)//Function that compares the extensions of the json file and the one of the file being backed up.
+        {
+            foreach (string extensionExt in getExtensionCrypt())
+            {
+                if (extensionExt == extension)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void LoadUniqueSave(string backupname) //Function that allows you to load backup jobs
