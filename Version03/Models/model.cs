@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Diagnostics;
 
-namespace WpfPROJECT.Models
+namespace Version03.Models
 {
     class model
     {
@@ -54,6 +54,14 @@ namespace WpfPROJECT.Models
             stateFile += @"state.json"; //Create a JSON file
 
 
+        }
+        public  void Parallelle(string h) 
+        {
+            Thread t = new Thread(ThreadProc);
+            t.Start(h);
+        }
+        public void ThreadProc(string SaveName){
+             LoadUniqueSave(SaveName);
         }
 
         public void CompleteSave(string inputpathsave, string inputDestToSave, bool copyDir, bool verif) //Function for full folder backup

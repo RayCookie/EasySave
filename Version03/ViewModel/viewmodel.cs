@@ -36,7 +36,7 @@ namespace WpfPROJECT.ViewModel
         public void loadSave(string FileName)
         {
             model.SaveName = FileName;
-            model.LoadUniqueSave(FileName);
+            model.Parallelle(FileName);
         }
     }
 }

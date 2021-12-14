@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WpfPROJECT.Models
+namespace  Version03.Models
 {
     //Class used for differential backup
     //It allows the comparison of the hashes of the files to know which file has been modified.
