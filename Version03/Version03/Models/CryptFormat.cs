@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace  Version03.Models
+namespace Version03.Models
 {
     class CryptFormat
     {

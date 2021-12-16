@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace  Version03.Models
+namespace Version03.Models
 {
     class DataLogs
     {
@@ -13,7 +13,6 @@ namespace  Version03.Models
         public string BackupDate { get; set; }
         public string TransactionTime { get; set; }
         public long TotalSize { get; set; }
-
 
     }
 }

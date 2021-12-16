@@ -55,14 +55,6 @@ namespace Version03.Models
 
 
         }
-        public  void Parallelle(string h) 
-        {
-            Thread t = new Thread(ThreadProc);
-            t.Start(h);
-        }
-        public void ThreadProc(string SaveName){
-             LoadUniqueSave(SaveName);
-        }
 
         public void CompleteSave(string inputpathsave, string inputDestToSave, bool copyDir, bool verif) //Function for full folder backup
         {
@@ -76,9 +68,9 @@ namespace Version03.Models
 
             if (!dir.Exists) //Check if the file is present
             {
-                
+
                 throw new DirectoryNotFoundException("ERROR 404 : Directory Not Found ! " + inputpathsave);
-                
+
 
             }
 
@@ -144,7 +136,7 @@ namespace Version03.Models
                 {
                     file.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
                 }
-                
+
                 nbfiles++;
                 size += file.Length;
 
@@ -449,9 +441,9 @@ namespace Version03.Models
                 NameStateFile = backup.SaveName;
                 CompleteSave(backup.SourceDir, backup.TargetDir, true, false); //Calling the function to run the full backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-                                                                                    
-                
-                                                          
+
+
+
 
             }
             else //If this is the wrong guy then, it means it's a differential backup
@@ -459,7 +451,7 @@ namespace Version03.Models
                 NameStateFile = backup.SaveName;
                 DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir); //Calling the function to start the differential backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-      
+
             }
 
         }
@@ -487,7 +479,7 @@ namespace Version03.Models
                         NameStateFile = backup.SaveName;
                         DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir);//call the DifferentialSave function
                         UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir);//call the Updatelogfile function
-                                                                                          
+
                     }
                 }
 
@@ -522,7 +514,7 @@ namespace Version03.Models
             string jsonString = File.ReadAllText(backupListFile); //Function to read json file
             Backup[] list = JsonConvert.DeserializeObject<Backup[]>(jsonString); // Function to dezerialize the json file
 
-            if(jsonString.Length != 0)
+            if (jsonString.Length != 0)
             {
                 foreach (var obj in list) //Loop to display the names of the backups
                 {

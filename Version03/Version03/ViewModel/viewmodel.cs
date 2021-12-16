@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Text;
-using Newtonsoft.Json;
-using WpfPROJECT.Models;
+using Version03.Models;
+using System.IO;
 
-namespace WpfPROJECT.ViewModel
+using Newtonsoft.Json;
+
+namespace Version03.ViewModel
 {
     class viewmodel
     {
@@ -36,7 +36,7 @@ namespace WpfPROJECT.ViewModel
         public void loadSave(string FileName)
         {
             model.SaveName = FileName;
-            model.Parallelle(FileName);
+            model.LoadUniqueSave(FileName);
         }
     }
 }
