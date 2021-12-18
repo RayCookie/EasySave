@@ -41,6 +41,8 @@ namespace Version03.Models
         public BackupState state { get; set; }
         private bool resumed = false;
         public EventWaitHandle auto = new ManualResetEvent(false);
+        private BackupState _state;
+
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         public model()
@@ -619,7 +621,15 @@ namespace Version03.Models
             erreur,
         }
 
+        public BackupState State
+        {
+            get { return _state; }
+            set 
+            { 
+                _state = value;
+               /* OnPropertyChanged("State");*/
+            }
+        }
 
-
-    }
+    }  
 }
