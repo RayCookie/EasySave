@@ -14,6 +14,8 @@ namespace easysave.ViewModel
         private int inputMenu;
         public int language;
 
+
+
         public viewmodel()
         {
             model = new model();
@@ -279,5 +281,14 @@ namespace easysave.ViewModel
             }
 
         }
+       
+
     }
 }
+
+
+
+
+
+
+
