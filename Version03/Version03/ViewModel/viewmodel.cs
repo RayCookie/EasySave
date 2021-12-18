@@ -36,7 +36,15 @@ namespace Version03.ViewModel
         public void loadSave(string FileName)
         {
             model.SaveName = FileName;
-            model.LoadUniqueSave(FileName);
+            model.Parallelle(FileName);
+        }
+        public void pause()
+        {
+            model.pause();
+        }
+        public void stop()
+        {
+            model.stop();
         }
     }
 }

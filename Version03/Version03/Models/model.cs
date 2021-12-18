@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
@@ -16,6 +19,7 @@ namespace Version03.Models
         private string serializeObj;
         public string backupListFile = System.Environment.CurrentDirectory + @"\Works\";
         public string stateFile = System.Environment.CurrentDirectory + @"\State\";
+        private readonly object Lock = new object();
 
         public DataState DataState { get; set; }
         public string NameStateFile { get; set; }
@@ -34,6 +38,9 @@ namespace Version03.Models
         public TimeSpan TimeTransfert { get; set; }
         public string userMenuInput { get; set; }
         public string MirrorDir { get; set; }
+        public BackupState state { get; set; }
+        private bool resumed = false;
+        public EventWaitHandle auto = new ManualResetEvent(false);
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         public model()
@@ -78,7 +85,7 @@ namespace Version03.Models
             Directory.CreateDirectory(inputDestToSave); // If the destination directory doesn't exist, create it.  
 
             FileInfo[] files = dir.GetFiles(); // Get the files in the directory and copy them to the new location.
-
+            FileInfo[] WordFiles = dir.GetFiles("*.docx");
             if (!verif) //  Check for the status file if it needs to reset the variables
             {
                 TotalSize = 0;
@@ -107,6 +114,7 @@ namespace Version03.Models
             //Loop that allows to copy the files to make the backup
             foreach (FileInfo file in files)
             {
+
                 string tempPath = Path.Combine(inputDestToSave, file.Name);
 
                 if (size > 0)
@@ -134,14 +142,27 @@ namespace Version03.Models
                 }
                 else
                 {
-                    file.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+                    if (file.Extension == ".docx")
+                    {
+                        string tempWordPath = Path.Combine(inputDestToSave, file.Name);
+                        file.CopyTo(tempWordPath, true); //Function that allows you to copy the Word file to its new folder.
+                    }
+
                 }
 
                 nbfiles++;
                 size += file.Length;
 
             }
+            foreach (FileInfo file in files)
+            {
+                if (file.Extension != ".docx")
+                {
+                    string tempPath = Path.Combine(inputDestToSave, file.Name);
+                    file.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+                }
 
+            }
             // If copying subdirectories, copy them and their contents to new location.
             if (copyDir)
             {
@@ -226,12 +247,26 @@ namespace Version03.Models
                 }
                 else
                 {
+                    if (v.Extension == ".docx")
+                    {
+                        string tempWordPath = Path.Combine(pathC, v.Name);
+                        v.CopyTo(tempWordPath, true); //Function that allows you to copy the Word file to its new folder.
+                    }
+
+                }
+
+
+                size += v.Length;
+                nbfiles++;
+            }
+            foreach (var v in queryList1Only)
+            {
+                if (v.Extension != ".docx")
+                {
+                    string tempPath = Path.Combine(pathC, v.Name);
                     v.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
                 }
 
-                v.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
-                size += v.Length;
-                nbfiles++;
             }
 
             //System which allows the values ​​to be reset to 0 at the end of the backup
@@ -287,7 +322,10 @@ namespace Version03.Models
 
                 this.serializeObj = JsonConvert.SerializeObject(stateList.ToArray(), Formatting.Indented) + Environment.NewLine; //Serialization for writing to json file
 
-                File.WriteAllText(stateFile, this.serializeObj); //Function to write to JSON file
+                lock  (Lock) 
+                {
+                    File.WriteAllText(stateFile, this.serializeObj);
+                } //Function to write to JSON file
             }
 
 
@@ -312,7 +350,11 @@ namespace Version03.Models
             var directory = System.IO.Path.GetDirectoryName(path); // This file saves in the project: \EasySaveApp\bin
 
             string serializeObj = JsonConvert.SerializeObject(datalogs, Formatting.Indented) + Environment.NewLine; //Serialization for writing to json file
-            File.AppendAllText(directory + @"DailyLogs_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json", serializeObj); //Function to write to log file
+          lock (Lock)
+            {
+                File.AppendAllText(directory + @"DailyLogs_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json", serializeObj); //Function to write to log file
+            }
+           
 
             stopwatch.Reset(); // Reset of stopwatch
         }
@@ -420,7 +462,6 @@ namespace Version03.Models
             Backup backup = null;
             this.TotalSize = 0;
             BackupNameState = backupname;
-
             string jsonString = File.ReadAllText(backupListFile); //Reading the json file
 
 
@@ -439,9 +480,9 @@ namespace Version03.Models
             if (backup.Type == 1) //If the type is 1, it means it's a full backup
             {
                 NameStateFile = backup.SaveName;
+
                 CompleteSave(backup.SourceDir, backup.TargetDir, true, false); //Calling the function to run the full backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-
 
 
 
@@ -526,6 +567,59 @@ namespace Version03.Models
             return names;
 
         }
+        public void ThreadProc(object SaveName) //Thread  fonction
+        {
+            LoadUniqueSave(SaveName as string);
+            
+        }
+        public void Parallelle(string h)
+        {
+            try
+            {
+                if (state ==BackupState.en_attente)
+                {
+                    resumed = true;
+                    state = BackupState.en_cours;
+                    auto.Set();
+                    return;
+
+                }
+                Thread t = new Thread(new ParameterizedThreadStart(ThreadProc));
+                t.Start(h);
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e);
+                this.state = BackupState.erreur;
+
+
+            }
+
+        }
+
+public void pause() //pause fonction
+        {
+            state = BackupState.en_attente;
+            auto.Reset();
+        }
+        
+        public void stop() //stop fonction
+        {
+            resumed = false;
+            state = BackupState.inactif;
+            auto.Reset();
+        }
+       
+        public enum BackupState  //BAckUp State fonction
+        {
+            inactif,
+            en_cours,
+            en_attente,
+            finie,
+            erreur,
+        }
+
+
 
     }
 }

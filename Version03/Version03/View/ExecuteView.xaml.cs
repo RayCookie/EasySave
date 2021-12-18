@@ -58,15 +58,16 @@ namespace Version03.View
                     foreach (string filename in listName.SelectedItems)
                     {
                         viewmodel.loadSave(filename);
-                        if (langue == 1)
-                        {
-                            MessageBox.Show("BACKUP SELECTED Saved Succefully!", "SAVE BackUp");
-                        }
-                        else if (langue == 2)
-                        {
-                            MessageBox.Show("travailles sélectionées ajouté ! ", "ERREUR");
-                        }
+                        
 
+                    }
+                    if (langue == 1)
+                    {
+                        MessageBox.Show("BACKUP SELECTED Saved Succefully!", "SAVE BackUp");
+                    }
+                    else if (langue == 2)
+                    {
+                        MessageBox.Show("travailles sélectionées ajouté ! ", "ERREUR");
                     }
                 }
                 else
@@ -107,6 +108,32 @@ namespace Version03.View
             foreach (string name in names)
             {
                 listName.Items.Add(name);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            viewmodel.pause();
+            if (langue == 1)
+            {
+                MessageBox.Show(" load work paused ", "!!!");
+            }
+            else if (langue == 2)
+            {
+                MessageBox.Show("travail en pause", "!!!");
+            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            viewmodel.stop();
+            if (langue == 1)
+            {
+                MessageBox.Show(" load work stoped ", "!!!");
+            }
+            else if (langue == 2)
+            {
+                MessageBox.Show("travail arreter", "!!!");
             }
         }
     }
