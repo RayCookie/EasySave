@@ -599,7 +599,7 @@ namespace Version03.Models
 
         }
 
-public void pause() //pause fonction
+        public void pause() //pause fonction
         {
             state = BackupState.en_attente;
             auto.Reset();
