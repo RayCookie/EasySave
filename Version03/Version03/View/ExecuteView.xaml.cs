@@ -30,6 +30,8 @@ namespace Version03.View
             InitializeComponent();
             viewmodel = new viewmodel();
             ShowListBox();
+            Models.Server server = Models.Server.GetInstance();
+            server.StartServer();
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)//english language
         {
@@ -135,6 +137,11 @@ namespace Version03.View
             {
                 MessageBox.Show("travail arreter", "!!!");
             }
+        }
+
+        private void listName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

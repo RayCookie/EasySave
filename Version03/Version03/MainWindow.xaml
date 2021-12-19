@@ -58,7 +58,7 @@
                              Foreground="#002d61"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                              Command="{Binding ExecuteViewCommand}"/>
+                              Command="{Binding ExecuteViewCommand}" Checked="RadioButton_Checked_1"/>
 
                 <RadioButton Content="Exit"
                              Height="50"

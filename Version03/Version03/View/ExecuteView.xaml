@@ -12,7 +12,7 @@
         <TextBlock x:Name="lLIST1" HorizontalAlignment="Left" Margin="6,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="99" Text="LIST OF Back Up"/>
         <TextBlock x:Name="lEnglish1" HorizontalAlignment="Left" Margin="33,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="15" Width="49" Text="ENGLISH"/>
         <TextBlock x:Name="lFrensh1" HorizontalAlignment="Left" Margin="160,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="57"><Run Text="FREN"/><Run Language="fr-fr" Text="CH"/><LineBreak/><Run Language="fr-fr"/></TextBlock>
-        <ListBox x:Name="listName" Margin="101,152,452,225" SelectionMode="Multiple" Background="White" />
+        <ListBox x:Name="listName" Margin="101,152,452,225" SelectionMode="Multiple" Background="White" SelectionChanged="listName_SelectionChanged" />
         <Button Content="" HorizontalAlignment="Left" Margin="457,180,0,0" VerticalAlignment="Top" Height="28" Width="83" Click="Button_Click_1" RenderTransformOrigin="-0.108,0.558"/>
         <TextBlock x:Name="lexecute" HorizontalAlignment="Left" Margin="482,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="54" Text="excute"/>
         <Button x:Name="pause" Content="pause" HorizontalAlignment="Left" Margin="465,256,0,0" VerticalAlignment="Top" Height="23" Width="75" Click="Button_Click"/>
