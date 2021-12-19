@@ -55,8 +55,17 @@ namespace Version03.View
         {
             if (listName.SelectedItem != null)
             {
-                if (Process.GetProcessesByName("Calculator").Length == 0)
+                while (Process.GetProcessesByName("Calculator").Length != 0)
                 {
+                    if (langue == 1)
+                    {
+                        MessageBox.Show("Work paused ,close SoftwareWork to continue", "ERROR");
+                    }
+                    else if (langue == 2)
+                    {
+                        MessageBox.Show("Travail en pause,fermez la SoftwareWork et réesseyez ", "ERREUR");
+                    }
+                }
                     foreach (string filename in listName.SelectedItems)
                     {
                         viewmodel.loadSave(filename);
@@ -69,22 +78,10 @@ namespace Version03.View
                     }
                     else if (langue == 2)
                     {
-                        MessageBox.Show("travailles sélectionées ajouté ! ", "ERREUR");
+                        MessageBox.Show("travailles sélectionées ajouté ! ", "Savegarde");
                     }
-                }
-                else
-
-                {
-                    if (langue == 1)
-                    {
-                        MessageBox.Show("close calculator and try again", "ERROR");
-                    }
-                    else if (langue == 2)
-                    {
-                        MessageBox.Show("fermez la calculatrice et réesseyez ", "ERREUR");
-                    }
-
-                }
+                
+              
 
             }
             else
