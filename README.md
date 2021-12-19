@@ -61,7 +61,7 @@ By entering the number 0 you will quit the application.
 
 EasySave 1.0 has been distributed to many customers.
 
-# Improvements:
+# Improvements: 04/12/2021
 
 1) Graphical Interface:
 
@@ -150,7 +150,7 @@ The requested evolutions for this new version EasySave 3.0 are :
 ---
 
 
-## Release Note V1.1:
+## Release Note V1.1: 18/12/2021
 
 Following the feedback, the management required us to release as soon as possible a version 1.1 that allows the user to choose the format of the log file (XML or JSON).
 
