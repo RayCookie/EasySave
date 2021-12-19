@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Version03.View"
              mc:Ignorable="d" 
+              xmlns:language="clr-namespace:Version03.Properties.Langs"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Grid.Row="1"
                             Grid.Column="1"
@@ -12,33 +13,30 @@
         <TextBox x:Name="tName" HorizontalAlignment="Left" Margin="144,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
         <TextBox x:Name="tSource" HorizontalAlignment="Left" Margin="144,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
         <TextBox x:Name="tDestination" HorizontalAlignment="Left" Margin="144,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="30"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="475,270,0,0" VerticalAlignment="Top" Height="55" Width="104" Click="Button_Click"/>
+        <Button Content="{x:Static language:Lang.BtnCreate}" HorizontalAlignment="Left" Margin="475,270,0,0" VerticalAlignment="Top" Height="55" Width="104" Click="Button_Click"/>
         <TextBox x:Name="tMirror" HorizontalAlignment="Left" Margin="142,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="29"/>
-        <ListBox x:Name="listName" Margin="144,341,484,36" SelectionMode="Multiple" Background="White" />
+        <ListBox x:Name="listName" Margin="200,353,404,24" SelectionMode="Multiple" Background="White" />
 
         <RadioButton x:Name="Complete_Save_Button" Content="" HorizontalAlignment="Left" Margin="508,162,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="diff_button" Content="" HorizontalAlignment="Left" Margin="508,210,0,0" VerticalAlignment="Top" />
-        <Button x:Name="english_Button" Content="" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Height="32" Width="95" Click="Button_Click_2"/>
-        <Button x:Name="french_button" Content="" HorizontalAlignment="Left" Margin="136,24,0,0" VerticalAlignment="Top" Height="32" Width="101" Click="french_button_Click"/>
-        <TextBlock x:Name="lName1" HorizontalAlignment="Left" Margin="33,96,0,0" Text="Nom" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="49"/>
+
+        <Label Content="{x:Static language:Lang.CrName}" HorizontalAlignment="Left" Margin="33,96,0,0"   VerticalAlignment="Top" Height="26" Width="49"/>
         <TextBlock x:Name="lSource1" HorizontalAlignment="Left" Margin="33,156,0,0" Text="Source" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="51"/>
         <TextBlock x:Name="ldestination" HorizontalAlignment="Left" Margin="20,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="85" Text="Destination"/>
-        <TextBlock x:Name="lMirror1" HorizontalAlignment="Left" Margin="16,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="85" Text="Mirror"/>
-        <TextBlock x:Name="lLIST1" HorizontalAlignment="Left" Margin="6,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="99" Text="LIST OF Back Up"/>
-        <TextBlock x:Name="lCreate1" HorizontalAlignment="Left" Margin="500,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="54" Text="Create"/>
-        <TextBlock x:Name="lComplete1" HorizontalAlignment="Left" Margin="547,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="132" Text="complete save" RenderTransformOrigin="0.535,0.567">
-            <TextBlock.RenderTransform>
+        <Label Content="{x:Static language:Lang.CrMirror}" HorizontalAlignment="Left" Margin="16,302,0,0" VerticalAlignment="Top" Height="26" Width="85" />
+        <Label Content="{x:Static language:Lang.BackupList}"  HorizontalAlignment="Left" Margin="6,353,0,0"  VerticalAlignment="Top" Height="26" Width="150" />
+        <Label Content="{x:Static language:Lang.Completesave}" HorizontalAlignment="Left" Margin="547,161,0,0"  VerticalAlignment="Top" Height="33" Width="132" RenderTransformOrigin="0.535,0.567">
+            <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform Angle="0.833"/>
                     <TranslateTransform/>
                 </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <TextBlock x:Name="lDifferentiel1" HorizontalAlignment="Left" Margin="548,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="126" Text="differentiel save" RenderTransformOrigin="0.571,0.79"/>
-        <TextBlock x:Name="lEnglish1" HorizontalAlignment="Left" Margin="33,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="15" Width="49" Text="ENGLISH"/>
-        <TextBlock x:Name="lFrensh1" HorizontalAlignment="Left" Margin="160,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="57"><Run Text="FREN"/><Run Language="fr-fr" Text="CH"/><LineBreak/><Run Language="fr-fr"/></TextBlock>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="{x:Static language:Lang.Differentialsave}" HorizontalAlignment="Left" Margin="548,209,0,0"  VerticalAlignment="Top" Height="46" Width="126"  RenderTransformOrigin="0.571,0.79"/>
+
 
         <Button Content="..." HorizontalAlignment="Left" Margin="267,158,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="57" Click="Button_Click_3"/>
         <Button Content="..." HorizontalAlignment="Left" Margin="269,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="57" Click="Button_Click_4"/>

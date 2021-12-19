@@ -37,14 +37,18 @@ namespace Version03
             Close();
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            new MainWindow().ShowDialog();
         }
 
-        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (cmb.SelectedIndex == 0)
+                Properties.Settings.Default.languageCode = "en-US";
+            else
+                Properties.Settings.Default.languageCode = "fr-FR";
+            Properties.Settings.Default.Save();
         }
     }
 }

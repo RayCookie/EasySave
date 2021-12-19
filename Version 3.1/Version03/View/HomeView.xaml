@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Version03.View"
              mc:Ignorable="d" 
+             xmlns:language="clr-namespace:Version03.Properties.Langs"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid >
         <StackPanel Orientation="Horizontal">
@@ -23,14 +24,11 @@
                 </Border.Clip>
                 <Grid>
                     <StackPanel>
-                        <TextBlock Text="SAVE F CHBAB"
+                        <Label Content="{x:Static language:Lang.Info1}"
                                    Foreground="White"
                                    FontSize="28"
                                    Margin="20,10,10,0"/>
-                        <TextBlock Text="Ya diag je te tue de bisou"
-                                   Foreground="White"
-                                   FontSize="28"
-                                   Margin="20,10,10,0"/>
+
                     </StackPanel>
                 </Grid>
             </Border>
@@ -47,7 +45,15 @@
                 </Border.Background>
                 <StackPanel>
 
-                    <TextBlock Text="Ya diag je &#xa;te tue &#xa;de bisou"
+                    <Label Content="{x:Static language:Lang.Cara1}"
+                                   Foreground="White"
+                                   FontSize="28"
+                                   Margin="20,10,10,0"/>
+                    <Label Content="{x:Static language:Lang.Cara2}"
+                                   Foreground="White"
+                                   FontSize="28"
+                                   Margin="20,10,10,0"/>
+                    <Label Content="{x:Static language:Lang.Cara3}"
                                    Foreground="White"
                                    FontSize="28"
                                    Margin="20,10,10,0"/>
