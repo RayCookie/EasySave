@@ -10,9 +10,11 @@ namespace Version03.ViewModel
 {
     class viewmodel
     {
+        int langue = 0;
         private model model;
         public viewmodel()
         {
+
             model = new model();
 
         }

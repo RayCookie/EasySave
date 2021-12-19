@@ -10,6 +10,7 @@
 		WindowStyle="None"
 		ResizeMode="NoResize"
 		Background="Transparent"
+        xmlns:language="clr-namespace:Version03.Properties.Langs"
 		AllowsTransparency="True">
     <Window.DataContext>
         <ViewModel:MainViewModel/>
@@ -33,7 +34,7 @@
                        FontSize="22"
                        Margin="20,0,0,0"/>
             <StackPanel Grid.Row = "1">
-                <RadioButton Content="Home"
+                <RadioButton Content="{x:Static language:Lang.Home}"
                              Height="50"
                              Foreground="#002d61"
                              FontSize="14"
@@ -41,26 +42,26 @@
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
 
-                <RadioButton Content="Parametre"
+                <RadioButton Content="{x:Static language:Lang.Parametre}"
                              Height="50"
                              Foreground="#002d61"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                              Command="{Binding SettingViewCommand}" Checked="RadioButton_Checked"/>
-                <RadioButton Content="Create"
+                              Command="{Binding SettingViewCommand}"/>
+                <RadioButton Content="{x:Static language:Lang.Create}"
                              Height="50"
                              Foreground="#002d61"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                               Command="{Binding ControlViewCommand}"/>
-                <RadioButton Content="Execute"
+                <RadioButton Content="{x:Static language:Lang.Execute}"
                              Height="50"
                              Foreground="#002d61"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                               Command="{Binding ExecuteViewCommand}"/>
 
-                <RadioButton Content="Exit"
+                <RadioButton Content="{x:Static language:Lang.Exit}"
                              Height="50"
                              Foreground="#002d61"
                              FontSize="14"
@@ -68,11 +69,26 @@
                              Click="ButtonExit_Click"/>
 
             </StackPanel>
-            <Image HorizontalAlignment="Left" Height="80" Margin="124,-13,0,0" VerticalAlignment="Top" Width="66" Source="/EasySave-1.png"/>
+
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="10"
                             Content="{Binding CurrentView}"/>
+
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center"
+                          HorizontalAlignment="Left"
+                          Margin="5">
+                <Label Content="{x:Static language:Lang.Choix}"/>
+                <ComboBox Name="cmb"
+                          Text=""
+                    SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBoxItem Content="{x:Static language:Lang.en}"/>
+                    <ComboBoxItem Content="{x:Static language:Lang.fr}"/>
+                </ComboBox>
+                
+                <Label Content="{x:Static language:Lang.Message}"/>
+            </StackPanel>
 
 
         </Grid>

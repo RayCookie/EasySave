@@ -31,24 +31,7 @@ namespace Version03.View
             viewmodel = new viewmodel();
             ShowListBox();
         }
-        private void Button_Click_2(object sender, RoutedEventArgs e)//english language
-        {
-            langue = 1;
-            lEnglish1.Text = "English";
-            lFrensh1.Text = "Frensh";
-            lexecute.Text = "Execute";
-            lLIST1.Text = "list of BackUp";
-
-        }
-
-        private void french_button_Click(object sender, RoutedEventArgs e)
-        {
-            langue = 2;
-            lEnglish1.Text = "Anglais";
-            lFrensh1.Text = "Français";
-            lexecute.Text = "Executer";
-            lLIST1.Text = "list de sauvegarde";
-        }
+        
         private void Button_Click_1(object sender, RoutedEventArgs e)//excute work button
         {
             if (listName.SelectedItem != null)

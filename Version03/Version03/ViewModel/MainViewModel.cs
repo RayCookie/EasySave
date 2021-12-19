@@ -13,7 +13,6 @@ namespace Version03.ViewModel
         public RelayCommand SettingViewCommand { get; set; }
         public HomeViewModel HomeVM { get; set; }
         public ControlViewModel ControlVM { get; set; }
-
         public ExecuteViewModel ExecuteVM { get; set; }
         public SettingViewModel SettingVM { get; set; }
 

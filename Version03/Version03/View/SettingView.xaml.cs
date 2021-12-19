@@ -26,14 +26,6 @@ namespace Version03.View
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            controlView.english(1);
-        }
-
-        private void french_button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

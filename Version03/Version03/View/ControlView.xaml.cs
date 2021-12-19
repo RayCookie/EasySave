@@ -29,38 +29,7 @@ namespace Version03.View
             viewmodel = new viewmodel();
             ShowListBox();
         }
-        private void Button_Click_2(object sender, RoutedEventArgs e)//english language
-        {
-            langue = 1;
-            lEnglish1.Text = "English";
-            lFrensh1.Text = "Frensh";
-            lName1.Text = "Name";
-            lSource1.Text = "Source";
-            ldestination.Text = "destination";
-            lMirror1.Text = "Mirror";
-            lLIST1.Text = "list of BackUp";
-            lComplete1.Text = "Complete save";
-            lDifferentiel1.Text = "Differentiel save";
-            lCreate1.Text = "Create";
-
-
-        }
-
-        private void french_button_Click(object sender, RoutedEventArgs e)
-        {
-            langue = 2;
-            lEnglish1.Text = "Anglais";
-            lFrensh1.Text = "Français";
-            lName1.Text = "Nom";
-            lSource1.Text = "Source";
-            ldestination.Text = "destination";
-            lMirror1.Text = "Mirroir";
-            lLIST1.Text = "list de sauvegarde";
-            lComplete1.Text = "Sauvegarde complete";
-            lDifferentiel1.Text = "Sauvegarde différentielle";
-            lCreate1.Text = "Crée";
-
-        }
+       
         private void Button_Click(object sender, RoutedEventArgs e)//add work button
         {
             string saveName = "";
@@ -199,19 +168,6 @@ namespace Version03.View
         {
             Process.Start("notepad.exe", @"..\..\..\Ressources\CryptExtension.json");
         }
-        public void english(int languue)
-        {
-            langue = languue;
-            lEnglish1.Text = "English";
-            lFrensh1.Text = "Frensh";
-            lName1.Text = "Name";
-            lSource1.Text = "Source";
-            ldestination.Text = "destination";
-            lMirror1.Text = "Mirror";
-            lLIST1.Text = "list of BackUp";
-            lComplete1.Text = "Complete save";
-            lDifferentiel1.Text = "Differentiel save";
-            lCreate1.Text = "Create";
-        }
+       
     }
 }
