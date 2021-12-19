@@ -1,0 +1,80 @@
+﻿<Window x:Class="Version03.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Version03"
+        xmlns:ViewModel="clr-namespace:Version03.ViewModel"
+        mc:Ignorable="d"
+        Height="600" Width="920"
+		WindowStyle="None"
+		ResizeMode="NoResize"
+		Background="Transparent"
+		AllowsTransparency="True">
+    <Window.DataContext>
+        <ViewModel:MainViewModel/>
+    </Window.DataContext>
+    <Border CornerRadius="20" Background="#FAEBD7" Margin="0,0,0,-6">
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="EasySave"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="#002d61"
+                       FontSize="22"
+                       Margin="20,0,0,0"/>
+            <StackPanel Grid.Row = "1">
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="#002d61"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+
+                <RadioButton Content="Parametre"
+                             Height="50"
+                             Foreground="#002d61"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                              Command="{Binding SettingViewCommand}" Checked="RadioButton_Checked"/>
+                <RadioButton Content="Create"
+                             Height="50"
+                             Foreground="#002d61"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                              Command="{Binding ControlViewCommand}"/>
+                <RadioButton Content="Execute"
+                             Height="50"
+                             Foreground="#002d61"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                              Command="{Binding ExecuteViewCommand}" Checked="RadioButton_Checked_1"/>
+
+                <RadioButton Content="Exit"
+                             Height="50"
+                             Foreground="#002d61"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="ButtonExit_Click"/>
+
+            </StackPanel>
+            <Image HorizontalAlignment="Left" Height="80" Margin="124,-13,0,0" VerticalAlignment="Top" Width="66" Source="/EasySave-1.png"/>
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
+
+
+        </Grid>
+    </Border>
+</Window>
