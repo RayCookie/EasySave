@@ -166,10 +166,10 @@ Version 1.1 must be released at the latest at the same time as version 2.0
 
 
 ## Team:
-* Denfir Rayen
-* Diag Mohammed
-* Haddidi Slimane
-* Allache Faten
-* Haddouche Othmane
+* DENFIR Rayen
+* DIAG Mohammed
+* HADIDI Slimane
+* ALLACHE Faten
+* HADDOUCHE Othmane
                  
  
