@@ -14,7 +14,7 @@ namespace Version03.Models
         public string TargetFile { get; set; }
         public float TotalFile { get; set; }
         public long TotalSize { get; set; }
-        public float Progress { get; set; }
+        public string Progress { get; set; }
         public long FileRest { get; set; }
         public long TotalSizeRest { get; set; }
 

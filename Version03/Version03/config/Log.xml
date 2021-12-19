@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-16"?>
+<DataLogs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DataLog>
+    <SourceDir>\test</SourceDir>
+    <TargetDir>\test</TargetDir>
+    <SaveName>test</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 00:25:42)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>\test2</SourceDir>
+    <TargetDir>\test2</TargetDir>
+    <SaveName>test2</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 00:27:31)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>C:\sourcepath\test</SourceDir>
+    <TargetDir>C:\destination\test</TargetDir>
+    <SaveName>test</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 00:33:28)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>C:\source\mirror</SourceDir>
+    <TargetDir>C:\destination\mirror</TargetDir>
+    <MirrorDir>C:\Mirror\mirror</MirrorDir>
+    <SaveName>mirror</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 00:37:20)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>C:\source\mirror</SourceDir>
+    <TargetDir>C:\destination\mirror</TargetDir>
+    <MirrorDir>C:\Mirror\mirror</MirrorDir>
+    <SaveName>mirror</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 00:56:24)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\Among.Us.v2020.11.17s\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 00:57:21)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+</DataLogs>

@@ -7,6 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace Version03.Models
 {
@@ -14,11 +15,14 @@ namespace Version03.Models
     {
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         //Declaration of all variables and properties
-
+        private DataLogs dataLogs;
+        private static Mutex mutex = new Mutex();
         public int checkdatabackup;
         private string serializeObj;
         public string backupListFile = System.Environment.CurrentDirectory + @"\Works\";
         public string stateFile = System.Environment.CurrentDirectory + @"\State\";
+        public string XMLbackupListFile = System.Environment.CurrentDirectory + @"\Works\";
+
         private readonly object Lock = new object();
 
         public DataState DataState { get; set; }
@@ -28,7 +32,7 @@ namespace Version03.Models
         public int nbfilesmax { get; set; }
         public int nbfiles { get; set; }
         public long size { get; set; }
-        public float progs { get; set; }
+        public string progs { get; set; }
         public string TargetDir { get; set; }
         public string SaveName { get; set; }
         public int Type { get; set; }
@@ -41,26 +45,67 @@ namespace Version03.Models
         public BackupState state { get; set; }
         private bool resumed = false;
         public EventWaitHandle auto = new ManualResetEvent(false);
-        private BackupState _state;
-
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         public model()
         {
-
+            dataLogs = new DataLogs();
             userMenuInput = " ";
 
             if (!Directory.Exists(backupListFile)) //Check if the folder is created
             {
                 DirectoryInfo di = Directory.CreateDirectory(backupListFile); //Function that creates the folder
             }
-            backupListFile += @"backupList.json"; //Create a JSON file
 
+            backupListFile += @"backupList.json"; //Create a JSON file
+            XMLbackupListFile += @"backupList.xml"; //Create a JSON file
             if (!Directory.Exists(stateFile))//Check if the folder is created
             {
                 DirectoryInfo di = Directory.CreateDirectory(stateFile); //Function that creates the folder
             }
             stateFile += @"state.json"; //Create a JSON file
+
+
+        }
+        public void Create_Logxml(string name,string src, string dest,string mirror) //Function to create a log into the log file for the work
+        {
+            var Temps = ("Timestamp", DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss"));
+
+
+            string xml = File.ReadAllText(DataLogs.filepath);
+            XmlRootAttribute xRoot = new XmlRootAttribute();
+            xRoot.ElementName = "DataLogs";
+            xRoot.IsNullable = true;
+
+           
+            XmlSerializer serializer = new XmlSerializer(typeof(List<DataLogs>), xRoot);
+
+            TextReader textReader = new StringReader(xml);
+
+            List<DataLogs> worklist = (List<DataLogs>)serializer.Deserialize(textReader);
+
+
+
+            worklist.Add(new DataLogs()
+            {
+                SaveName = name,
+                SourceDir = src + "\\" + name,
+                TargetDir = dest + "\\" + name,
+                MirrorDir=mirror + "\\" + name,
+                //TransactionTime = Convert.ToString(ts),
+                //TotalSize =(Taille),
+                BackupDate = Convert.ToString(Temps)
+            });
+
+
+
+
+            var writer1 = new StringWriter();
+            serializer.Serialize(writer1, worklist);
+            var xml1 = writer1.ToString();
+            File.WriteAllText(DataLogs.filepath, xml1);
+
+
 
 
         }
@@ -87,14 +132,14 @@ namespace Version03.Models
             Directory.CreateDirectory(inputDestToSave); // If the destination directory doesn't exist, create it.  
 
             FileInfo[] files = dir.GetFiles(); // Get the files in the directory and copy them to the new location.
-            FileInfo[] WordFiles = dir.GetFiles("*.docx");
+
             if (!verif) //  Check for the status file if it needs to reset the variables
             {
                 TotalSize = 0;
                 nbfilesmax = 0;
                 size = 0;
                 nbfiles = 0;
-                progs = 0;
+                progs = "0";
 
                 foreach (FileInfo file in files) // Loop to allow calculation of files and folder size
                 {
@@ -116,24 +161,24 @@ namespace Version03.Models
             //Loop that allows to copy the files to make the backup
             foreach (FileInfo file in files)
             {
-
+                nbfiles = 1;
                 string tempPath = Path.Combine(inputDestToSave, file.Name);
+                size = file.Length;
 
-                if (size > 0)
-                {
-                    progs = ((float)size / TotalSize) * 100;
-                }
-
+                int filesLeftToDo = nbfilesmax - nbfiles;
                 //Systems which allows to insert the values ​​of each file in the report file.
                 DataState.SourceFile = Path.Combine(inputpathsave, file.Name);
                 DataState.TargetFile = tempPath;
-                DataState.TotalSize = nbfilesmax;
-                DataState.TotalFile = TotalSize;
+                DataState.TotalSize = file.Length;
+                DataState.TotalFile = nbfilesmax;
                 DataState.TotalSizeRest = TotalSize - size;
                 DataState.FileRest = nbfilesmax - nbfiles;
                 DataState.Progress = progs;
-
-                UpdateStatefile(); //Call of the function to start the state file system
+                if (size > 0)
+                {
+                    progs = Convert.ToString((100 - (filesLeftToDo * 100) / nbfilesmax)) + "%";
+                }
+                UpdateStatefile(file.Length); //Call of the function to start the state file system
 
 
                 if (CryptExt(Path.GetExtension(file.Name)))
@@ -141,27 +186,50 @@ namespace Version03.Models
                     cryptwatch.Start();
                     Encrypt(DataState.SourceFile, tempPath);
                     cryptwatch.Stop();
-                }
-                else
-                {
-                    if (file.Extension == ".docx")
+                    if (file.Length > 70)
                     {
                         string tempWordPath = Path.Combine(inputDestToSave, file.Name);
                         file.CopyTo(tempWordPath, true); //Function that allows you to copy the Word file to its new folder.
                     }
 
                 }
-
                 nbfiles++;
                 size += file.Length;
 
             }
             foreach (FileInfo file in files)
             {
-                if (file.Extension != ".docx")
+                if (CryptExt(file.Extension))
                 {
-                    string tempPath = Path.Combine(inputDestToSave, file.Name);
-                    file.CopyTo(tempPath, true); //Function that allows you to copy the file to its new folder.
+                    if (file.Length <= 70)
+                    {
+                        string tempWordPath = Path.Combine(inputDestToSave, file.Name);
+                        file.CopyTo(tempWordPath, true); //Function that allows you to copy the Word file to its new folder.
+                    }
+                }
+
+            }
+            foreach (FileInfo file in files)
+            {
+                if (!CryptExt(file.Extension))
+                {
+                    if (file.Length > 70)
+                    {
+                        string tempWordPath = Path.Combine(inputDestToSave, file.Name);
+                        file.CopyTo(tempWordPath, true); //Function that allows you to copy the Word file to its new folder.
+                    }
+                }
+
+            }
+            foreach (FileInfo file in files)
+            {
+                if (!CryptExt(file.Extension))
+                {
+                    if (file.Length <= 70)
+                    {
+                        string tempWordPath = Path.Combine(inputDestToSave, file.Name);
+                        file.CopyTo(tempWordPath, true); //Function that allows you to copy the Word file to its new folder.
+                    }
                 }
 
             }
@@ -175,17 +243,17 @@ namespace Version03.Models
                 }
             }
             //System which allows the values ​​to be reset to 0 at the end of the backup
-            DataState.TotalSize = TotalSize;
+
             DataState.SourceFile = null;
             DataState.TargetFile = null;
             DataState.TotalFile = 0;
             DataState.TotalSize = 0;
             DataState.TotalSizeRest = 0;
             DataState.FileRest = 0;
-            DataState.Progress = 0;
+            DataState.Progress = "0";
             DataState.SaveState = false;
 
-            UpdateStatefile(); //Call of the function to start the state file system
+            UpdateStatefile(DataState.TotalSize); //Call of the function to start the state file system
 
             stopwatch.Stop(); //Stop the stopwatch
             cryptwatch.Stop();
@@ -217,7 +285,7 @@ namespace Version03.Models
             var queryList1Only = (from file in list1 select file).Except(list2, myFileCompare);
             size = 0;
             nbfiles = 0;
-            progs = 0;
+            progs = "0";
 
             foreach (var v in queryList1Only)
             {
@@ -239,7 +307,7 @@ namespace Version03.Models
                 DataState.FileRest = nbfilesmax - nbfiles;
                 DataState.Progress = progs;
 
-                UpdateStatefile();//Call of the function to start the state file system
+                UpdateStatefile(DataState.TotalSize);//Call of the function to start the state file system
 
                 if (CryptExt(Path.GetExtension(v.Name)))
                 {
@@ -278,9 +346,9 @@ namespace Version03.Models
             DataState.TotalSize = 0;
             DataState.TotalSizeRest = 0;
             DataState.FileRest = 0;
-            DataState.Progress = 0;
+            DataState.Progress = "0";
             DataState.SaveState = false;
-            UpdateStatefile();//Call of the function to start the state file system
+            UpdateStatefile(DataState.TotalSize);//Call of the function to start the state file system
 
             stopwatch.Stop(); //Stop the stopwatch
             cryptwatch.Stop();
@@ -288,7 +356,7 @@ namespace Version03.Models
             //this.CryptTransfert = cryptwatch.Elapsed;
         }
 
-        private void UpdateStatefile()//Function that updates the status file.
+        private void UpdateStatefile(long totalsize)//Function that updates the status file.
         {
             List<DataState> stateList = new List<DataState>();
             this.serializeObj = null;
@@ -310,7 +378,7 @@ namespace Version03.Models
                         obj.SourceFile = this.DataState.SourceFile;
                         obj.TargetFile = this.DataState.TargetFile;
                         obj.TotalFile = this.DataState.TotalFile;
-                        obj.TotalSize = this.DataState.TotalSize;
+                        obj.TotalSize = totalsize;
                         obj.FileRest = this.DataState.FileRest;
                         obj.TotalSizeRest = this.DataState.TotalSizeRest;
                         obj.Progress = this.DataState.Progress;
@@ -324,10 +392,11 @@ namespace Version03.Models
 
                 this.serializeObj = JsonConvert.SerializeObject(stateList.ToArray(), Formatting.Indented) + Environment.NewLine; //Serialization for writing to json file
 
-                lock  (Lock) 
-                {
-                    File.WriteAllText(stateFile, this.serializeObj);
-                } //Function to write to JSON file
+                mutex.WaitOne();
+
+                File.WriteAllText(stateFile, this.serializeObj);
+                mutex.ReleaseMutex();
+                //Function to write to JSON file
             }
 
 
@@ -346,29 +415,33 @@ namespace Version03.Models
                 BackupDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
                 TotalSize = TotalSize,
                 TransactionTime = elapsedTime
-            };
+                
+        };
+            
 
             string path = System.Environment.CurrentDirectory; //Allows you to retrieve the path of the program environment
             var directory = System.IO.Path.GetDirectoryName(path); // This file saves in the project: \EasySaveApp\bin
 
             string serializeObj = JsonConvert.SerializeObject(datalogs, Formatting.Indented) + Environment.NewLine; //Serialization for writing to json file
-          lock (Lock)
+            lock (Lock)
             {
                 File.AppendAllText(directory + @"DailyLogs_" + DateTime.Now.ToString("dd-MM-yyyy") + ".json", serializeObj); //Function to write to log file
             }
-           
+
 
             stopwatch.Reset(); // Reset of stopwatch
         }
 
         public void AddSave(Backup backup) //Function that creates a backup job
         {
+
             List<Backup> backupList = new List<Backup>();
             this.serializeObj = null;
 
             if (!File.Exists(backupListFile)) //Checking if the file exists
             {
                 File.WriteAllText(backupListFile, this.serializeObj);
+                File.WriteAllText(XMLbackupListFile, this.serializeObj);
             }
 
             string jsonString = File.ReadAllText(backupListFile); //Reading the json file
@@ -379,17 +452,21 @@ namespace Version03.Models
                 foreach (var obj in list) //Loop to add the information in the json
                 {
                     backupList.Add(obj);
+                  
+                    
                 }
             }
             backupList.Add(backup); //Allows you to prepare the objects for the json filling
 
             this.serializeObj = JsonConvert.SerializeObject(backupList.ToArray(), Formatting.Indented) + Environment.NewLine; //Serialization for writing to json file
             File.WriteAllText(backupListFile, this.serializeObj); // Writing to the json file
+            File.WriteAllText(XMLbackupListFile, this.serializeObj); // Writing to the  XML file
 
             DataState = new DataState(this.SaveName); //Class initiation
 
             DataState.BackupDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"); //Adding the time in the variable
             AddState(); //Call of the function to add the backup in the report file.
+            
         }
 
         public void AddState() //Function that allows you to add a backup job to the report file.
@@ -485,7 +562,7 @@ namespace Version03.Models
 
                 CompleteSave(backup.SourceDir, backup.TargetDir, true, false); //Calling the function to run the full backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-
+                Create_Logxml(backup.SaveName, backup.SourceDir, backup.TargetDir,"");
 
 
             }
@@ -494,7 +571,7 @@ namespace Version03.Models
                 NameStateFile = backup.SaveName;
                 DifferentialSave(backup.SourceDir, backup.MirrorDir, backup.TargetDir); //Calling the function to start the differential backup
                 UpdateLogFile(backup.SaveName, backup.SourceDir, backup.TargetDir); //Call of the function to start the modifications of the log file
-
+                Create_Logxml(backup.SaveName, backup.SourceDir, backup.TargetDir,backup.MirrorDir);
             }
 
         }
@@ -572,13 +649,13 @@ namespace Version03.Models
         public void ThreadProc(object SaveName) //Thread  fonction
         {
             LoadUniqueSave(SaveName as string);
-            
+
         }
         public void Parallelle(string h)
         {
             try
             {
-                if (state ==BackupState.en_attente)
+                if (state == BackupState.en_attente)
                 {
                     resumed = true;
                     state = BackupState.en_cours;
@@ -589,7 +666,7 @@ namespace Version03.Models
                 Thread t = new Thread(new ParameterizedThreadStart(ThreadProc));
                 t.Start(h);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine(e);
                 this.state = BackupState.erreur;
@@ -604,14 +681,14 @@ namespace Version03.Models
             state = BackupState.en_attente;
             auto.Reset();
         }
-        
+
         public void stop() //stop fonction
         {
             resumed = false;
             state = BackupState.inactif;
             auto.Reset();
         }
-       
+
         public enum BackupState  //BAckUp State fonction
         {
             inactif,
@@ -621,15 +698,7 @@ namespace Version03.Models
             erreur,
         }
 
-        public BackupState State
-        {
-            get { return _state; }
-            set 
-            { 
-                _state = value;
-               /* OnPropertyChanged("State");*/
-            }
-        }
 
-    }  
+
+    }
 }
