@@ -41,5 +41,10 @@ namespace Version03
         {
 
         }
+
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

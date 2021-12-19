@@ -1,0 +1,16 @@
+﻿<Window x:Class="Client_Distance.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client_Distance"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1068">
+    <Grid>
+        <Button x:Name="EndButton" Content="End" HorizontalAlignment="Left" Height="31" Margin="810,70,0,0" VerticalAlignment="Top" Width="238" Click="EndButton_Click"/>
+        <DataGrid x:Name="test_grid" HorizontalAlignment="Left" Height="387" Margin="80,10,0,0" VerticalAlignment="Top" Width="617" SelectionChanged="test_grid_SelectionChanged"/>
+        <Button x:Name="pause_button" Content="Pause and Play" HorizontalAlignment="Left" Height="28" Margin="810,25,0,0" VerticalAlignment="Top" Width="238" Click="pause_button_Click"/>
+        <Label x:Name="test" HorizontalAlignment="Left" Height="102" Margin="810,204,0,0" VerticalAlignment="Top" Width="119"/>
+        <Label x:Name="test_labs" HorizontalAlignment="Left" Height="89" Margin="805,217,0,0" VerticalAlignment="Top" Width="176"/>
+    </Grid>
+</Window>
