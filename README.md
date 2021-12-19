@@ -21,9 +21,9 @@ Languages and FrameWork :
 
 ---
 
-## Release Note V1.0:
-* 25-11-2021 - Version 1 consoles EasySave v1.0: in this first version our software is realized in console line without graphical interface 
-Features:
+## Release Note V1.0: 25/11/2021
+* in this first version our software is realized in console line without graphical interface 
+# Features:
 * Create a backup job defined by a name, a source path, a destination path and a backup type (full or differential)
 * Create up to 5 backup jobs
 * Display the created backups
@@ -61,31 +61,31 @@ By entering the number 0 you will quit the application.
 
 EasySave 1.0 has been distributed to many customers.
 
-# Improvements:
+# Improvements: 04/12/2021
 
-1) Graphical Interface
+1) Graphical Interface:
 
 Console mode is discontinued. The application is now be developed in WPF under . Net Core
 
-2) Unlimited number of jobs
+2) Unlimited number of jobs:
 
 The number of backup jobs is now unlimited.
 
-3) Cryping via CryptoSoft software
+3) Cryping via CryptoSoft software:
 
-The software is able to encrypt the files using the CryptoSoft software . Only files whose extensions have been defined by the user in the general settings will be encrypted.
+The software is able to encrypt the files using the CryptoSoft software . Only files whose extensions have been defined by the user in the general settings will be       encrypted.
 
 4) Evolution of the Log Daily file
 
-The daily log file must contain additional information
+    The daily log file must contain additional information
 
-Time required to encrypt the file (in ms)
+    Time required to encrypt the file (in ms)
 
-0: no encryption
+    * 0: no encryption
 
->0: encryption time (in ms)
+    * >0: encryption time (in ms)
 
-<0: error code
+    * <0: error code
 
 5) Business Software
 
@@ -94,7 +94,7 @@ The presence of business software is detected, the software must prohibit the la
 ---
 
 
-## Release Note V3.0:
+## Release Note V3.0: 18/12/2021
 
 The requested evolutions for this new version EasySave 3.0 are :
 
@@ -102,55 +102,55 @@ The requested evolutions for this new version EasySave 3.0 are :
 
 1) Parallel backup
 
-Backup jobs will be done in parallel (no more sequential mode).
+    Backup jobs will be done in parallel (no more sequential mode).
 
 2) Priority files management
 
-No backup of a non-priority file can be done as long as there are priority files pending on at least one job. Files whose extensions are declared by the user in a predefined list (present in the general parameters) are considered as priority files.
+    No backup of a non-priority file can be done as long as there are priority files pending on at least one job. Files whose extensions are declared by the user in a predefined     list (present in the general parameters) are considered as priority files.
 
 3) Prohibition of simultaneous transfer of files of more than n KB
 
-In order not to saturate the bandwidth, it is forbidden to transfer at the same time two files whose size is greater than n Kb. (n Kb can be set)
+    In order not to saturate the bandwidth, it is forbidden to transfer at the same time two files whose size is greater than n Kb. (n Kb can be set)
 
-Remark: during the transfer of a file larger than n Kb, the other jobs can transfer files whose sizes are smaller (subject to the respect of the priority files rule)
+    Remark: during the transfer of a file larger than n Kb, the other jobs can transfer files whose sizes are smaller (subject to the respect of the priority files rule)
 
 4) Real-time interaction with each job or all jobs ( functinnality in progress ) 
 
-For each backup job (or set of jobs), the user must be able to
+    For each backup job (or set of jobs), the user must be able to
 
-Pause (effective pause after the current file transfer)
+    * Pause (effective pause after the current file transfer)
 
-Play (start or resume a pause)
+    * Play (start or resume a pause)
 
-Stop (immediate stop of the work and the task in progress)
+    * Stop (immediate stop of the work and the task in progress)
 
-The user must be able to follow the progress of each job in real time (at least a percentage of progress).
+    The user must be able to follow the progress of each job in real time (at least a percentage of progress).
 
 5) Temporary pause if a business software is detected
 
-If the software detects the operation of a business software, it must pause the transfer of files
+    If the software detects the operation of a business software, it must pause the transfer of files
 
-Example: if the calculator application is launched, all the tasks must be paused.
+    Example: if the calculator application is launched, all the tasks must be paused.
 
 6) Remote console ( funtionnality in progress)
 
-In order to follow in real time the progress of the backups on a remote workstation, you must develop a GUI allowing a user to follow the progress of the backups on a remote workstation but also to act on them
+    In order to follow in real time the progress of the backups on a remote workstation, you must develop a GUI allowing a user to follow the progress of the backups on a remote     workstation but also to act on them
 
-The minimum specifications of this console are :
+    The minimum specifications of this console are :
 
-- Design mode: WPF and FrameWork .NetCore
+  - Design mode: WPF and FrameWork .NetCore
 
-- Communication via Sockets.
+  - Communication via Sockets.
 
 7) The application is Mono-instance.
 
-The application cannot be launched more than once on the same computer
+    The application cannot be launched more than once on the same computer
 
 
 ---
 
 
-## Release Note V1.1:
+## Release Note V1.1: 18/12/2021
 
 Following the feedback, the management required us to release as soon as possible a version 1.1 that allows the user to choose the format of the log file (XML or JSON).
 
@@ -166,10 +166,10 @@ Version 1.1 must be released at the latest at the same time as version 2.0
 
 
 ## Team:
-* Denfir Rayen
-* Diag Mohammed
-* Haddidi Slimane
-* Allache Faten
-* Haddouche Othmane
+* DENFIR Rayen
+* DIAG Mohammed
+* HADIDI Slimane
+* ALLACHE Faten
+* HADDOUCHE Othmane
                  
  
