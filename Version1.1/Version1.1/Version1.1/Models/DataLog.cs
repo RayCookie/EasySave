@@ -2,10 +2,12 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Version03.Models
+
+
+namespace easysave.Model
 {
     [XmlRoot("DataLog"), XmlType("DataLog")]
-  public  class DataLogs
+    public class DataLogs
     {
         public static string filepath = @"..\..\..\Config\Log.xml";
 

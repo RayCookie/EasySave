@@ -6,6 +6,10 @@ using System.IO;
 
 using Newtonsoft.Json;
 
+/*private List<string> nameslist;
+private ICommand _PauseTask;
+private ICommand _StopTask;*/
+
 namespace Version03.ViewModel
 {
     class viewmodel
@@ -48,5 +52,37 @@ namespace Version03.ViewModel
         {
             model.stop();
         }
+
+       /* public List<String> NamesList
+        {
+            get
+            {
+                return nameslist;
+            }
+            set
+            {
+                nameslist = value;
+
+                OnPropertyChanged("NamesList");
+            }
+        }
+                public ICommand StopTask
+        {
+            get
+            {
+                if (_StopTask == null) _StopTask = new RelayCommand((object param) => Backup.Stop(), (object sender) => Backup != null && (Backup.State == BackupState.En_Cours || Backup.State == BackupState.En_Attente));
+                return _StopTask;
+            }
+        }
+        public ICommand PauseTask
+        {
+            get
+            {
+                if (_PauseTask == null) _PauseTask = new RelayCommand((object param) => Backup.Pause(), (object sender) => Backup != null && Backup.State == BackupState.En_Cours);
+                return _PauseTask;
+            }
+            
+        }
+        */
     }
 }
