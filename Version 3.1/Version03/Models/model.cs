@@ -143,14 +143,23 @@ namespace Version03.Models
 
                 foreach (FileInfo file in files) // Loop to allow calculation of files and folder size
                 {
+                    if (state == BackupState.finie) return;
+                    if (state == BackupState.en_cours) auto.Set();
+                    auto.WaitOne();
                     TotalSize += file.Length;
                     nbfilesmax++;
                 }
                 foreach (DirectoryInfo subdir in dirs) // Loop to allow calculation of subfiles and subfolder size
                 {
+                    if (state == BackupState.finie) return;
+                    if (state == BackupState.en_cours) auto.Set();
+                    auto.WaitOne();
                     FileInfo[] Maxfiles = subdir.GetFiles();
                     foreach (FileInfo file in Maxfiles)
                     {
+                        if (state == BackupState.finie) return;
+                        if (state == BackupState.en_cours) auto.Set();
+                        auto.WaitOne();
                         TotalSize += file.Length;
                         nbfilesmax++;
                     }
@@ -161,6 +170,9 @@ namespace Version03.Models
             //Loop that allows to copy the files to make the backup
             foreach (FileInfo file in files)
             {
+                if (state == BackupState.finie) return;
+                if (state == BackupState.en_cours) auto.Set();
+                auto.WaitOne();
                 nbfiles = 1;
                 string tempPath = Path.Combine(inputDestToSave, file.Name);
                 size = file.Length;
@@ -199,6 +211,9 @@ namespace Version03.Models
             }
             foreach (FileInfo file in files)
             {
+                if (state == BackupState.finie) return;
+                if (state == BackupState.en_cours) auto.Set();
+                auto.WaitOne();
                 if (CryptExt(file.Extension))
                 {
                     if (file.Length <= 70)
@@ -211,6 +226,9 @@ namespace Version03.Models
             }
             foreach (FileInfo file in files)
             {
+                if (state == BackupState.finie) return;
+                if (state == BackupState.en_cours) auto.Set();
+                auto.WaitOne();
                 if (!CryptExt(file.Extension))
                 {
                     if (file.Length > 70)
@@ -223,6 +241,9 @@ namespace Version03.Models
             }
             foreach (FileInfo file in files)
             {
+                if (state == BackupState.finie) return;
+                if (state == BackupState.en_cours) auto.Set();
+                auto.WaitOne();
                 if (!CryptExt(file.Extension))
                 {
                     if (file.Length <= 70)
@@ -238,6 +259,9 @@ namespace Version03.Models
             {
                 foreach (DirectoryInfo subdir in dirs)
                 {
+                    if (state == BackupState.finie) return;
+                    if (state == BackupState.en_cours) auto.Set();
+                    auto.WaitOne();
                     string tempPath = Path.Combine(inputDestToSave, subdir.Name);
                     CompleteSave(subdir.FullName, tempPath, copyDir, true);
                 }
@@ -288,7 +312,10 @@ namespace Version03.Models
             progs = "0";
 
             foreach (var v in queryList1Only)
-            {
+            { 
+                if (state == BackupState.finie) return;
+                if (state == BackupState.en_cours) auto.Set();
+                auto.WaitOne();
                 TotalSize += v.Length;
                 nbfilesmax++;
 
@@ -297,6 +324,9 @@ namespace Version03.Models
             //Loop that allows the backup of different files
             foreach (var v in queryList1Only)
             {
+                if (state == BackupState.finie) return;
+                if (state == BackupState.en_cours) auto.Set();
+                auto.WaitOne();
                 string tempPath = Path.Combine(pathC, v.Name);
                 //Systems which allows to insert the values ​​of each file in the report file.
                 DataState.SourceFile = Path.Combine(pathA, v.Name);
@@ -331,6 +361,9 @@ namespace Version03.Models
             }
             foreach (var v in queryList1Only)
             {
+                if (state == BackupState.finie) return;
+                if (state == BackupState.en_cours) auto.Set();
+                auto.WaitOne();
                 if (v.Extension != ".docx")
                 {
                     string tempPath = Path.Combine(pathC, v.Name);
@@ -664,6 +697,7 @@ namespace Version03.Models
 
                 }
                 Thread t = new Thread(new ParameterizedThreadStart(ThreadProc));
+                auto.Set();
                 t.Start(h);
             }
             catch (Exception e)
@@ -687,6 +721,8 @@ namespace Version03.Models
             resumed = false;
             state = BackupState.inactif;
             auto.Reset();
+           
+
         }
 
         public enum BackupState  //BAckUp State fonction

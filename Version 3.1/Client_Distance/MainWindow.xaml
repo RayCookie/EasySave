@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:Client_Distance"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1068">
-    <Grid>
+    <Grid Background="#FAEBD7">
         <Button x:Name="EndButton" Content="End" HorizontalAlignment="Left" Height="31" Margin="810,70,0,0" VerticalAlignment="Top" Width="238" Click="EndButton_Click"/>
         <DataGrid x:Name="test_grid" HorizontalAlignment="Left" Height="387" Margin="80,10,0,0" VerticalAlignment="Top" Width="617" SelectionChanged="test_grid_SelectionChanged"/>
         <Button x:Name="pause_button" Content="Pause and Play" HorizontalAlignment="Left" Height="28" Margin="810,25,0,0" VerticalAlignment="Top" Width="238" Click="pause_button_Click"/>
         <Label x:Name="test" HorizontalAlignment="Left" Height="102" Margin="810,204,0,0" VerticalAlignment="Top" Width="119"/>
-        <Label x:Name="test_labs" HorizontalAlignment="Left" Height="89" Margin="805,217,0,0" VerticalAlignment="Top" Width="176"/>
+        <ListBox x:Name="listName" Margin="101,152,452,225" SelectionMode="Multiple" Background="White" SelectionChanged="listName_SelectionChanged" />
     </Grid>
 </Window>

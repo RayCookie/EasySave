@@ -85,4 +85,124 @@
     <BackupDate>(Timestamp, 12/19/2021 03:39:07)</BackupDate>
     <TotalSize>0</TotalSize>
   </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\Among.Us.v2020.11.17s\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:16:15)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\Among.Us.v2020.11.17s\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:16:28)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\Among.Us.v2020.11.17s\test</SourceDir>
+    <TargetDir>C:\destination\test</TargetDir>
+    <MirrorDir>\test</MirrorDir>
+    <SaveName>test</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:37:59)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\Among.Us.v2020.11.17s\test</SourceDir>
+    <TargetDir>C:\destination\test</TargetDir>
+    <MirrorDir>\test</MirrorDir>
+    <SaveName>test</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:38:12)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\Among.Us.v2020.11.17s\test</SourceDir>
+    <TargetDir>C:\destination\test</TargetDir>
+    <MirrorDir>\test</MirrorDir>
+    <SaveName>test</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:44:39)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:48:01)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:49:00)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:49:38)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:49:45)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:55:21)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\jeux</SourceDir>
+    <TargetDir>C:\destination\jeux</TargetDir>
+    <MirrorDir>\jeux</MirrorDir>
+    <SaveName>jeux</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 12:55:32)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\Among.Us.v2020.11.17s\test1</SourceDir>
+    <TargetDir>C:\destination\test1</TargetDir>
+    <MirrorDir>\test1</MirrorDir>
+    <SaveName>test1</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 14:40:27)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\tset2</SourceDir>
+    <TargetDir>C:\destination\tset2</TargetDir>
+    <MirrorDir>C:\Mirror\tset2</MirrorDir>
+    <SaveName>tset2</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 14:47:30)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>D:\Games\eFootball PES 2021\download\tset2</SourceDir>
+    <TargetDir>C:\destination\tset2</TargetDir>
+    <MirrorDir>C:\Mirror\tset2</MirrorDir>
+    <SaveName>tset2</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 14:54:02)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
+  <DataLog>
+    <SourceDir>C:\sourcepath\test3</SourceDir>
+    <TargetDir>C:\destination\test3</TargetDir>
+    <MirrorDir>\test3</MirrorDir>
+    <SaveName>test3</SaveName>
+    <BackupDate>(Timestamp, 12/19/2021 14:58:30)</BackupDate>
+    <TotalSize>0</TotalSize>
+  </DataLog>
 </DataLogs>

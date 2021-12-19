@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Version03.ViewModel;
+using System.Threading;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Version03.View
 {
@@ -23,6 +26,7 @@ namespace Version03.View
 
     public partial class ExecuteView : UserControl
     {
+        private static Mutex mutex = new Mutex();
         private viewmodel viewmodel;
         int langue = 1;
         public ExecuteView()
@@ -32,8 +36,27 @@ namespace Version03.View
             ShowListBox();
             Models.Server server = Models.Server.GetInstance();
             server.StartServer();
+            Thread recup_etat = new Thread(Suivit_Loaded);
+            recup_etat.Start();
         }
         
+        private void Suivit_Loaded()
+        {
+            while (true)
+            {
+                Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
+                {
+                    mutex.WaitOne();
+                    var jsonDataWork = File.ReadAllText(System.Environment.CurrentDirectory + @"\State\state.json");
+                    mutex.ReleaseMutex();
+                    var workList = JsonConvert.DeserializeObject<List<Models.DataState>>(jsonDataWork) ?? new List<Models.DataState>();
+
+                    progress.ItemsSource = workList;
+                    
+                }));
+                Thread.Sleep(800);
+            }
+        }
       
         private void Button_Click_1(object sender, RoutedEventArgs e)//excute work button
         {

@@ -25,16 +25,28 @@ namespace Client_Distance
 
     class Etat_Inactive
     {
-        public static string filePath = @"..\..\..\state.json";
+        public static string filePath = @"C:\Users\hp\source\repos\RayCookie\EasySave\Version03\Version03\bin\Debug\netcoreapp3.0\State\state.json";
 
-        public string Name { get; set; }
-        public string Progression { get; set; }
-        public string State = "INACTIVE";
+        // Declaration of properties that are used for saving information for the report file in JSON
+        public string SaveName { get; set; }
+        public string BackupDate { get; set; }
+        public bool SaveState { get; set; }
+        public string SourceFile { get; set; }
+        public string TargetFile { get; set; }
+        public float TotalFile { get; set; }
+        public long TotalSize { get; set; }
+        public float Progress { get; set; }
+        public long FileRest { get; set; }
+        public long TotalSizeRest { get; set; }
+
+       
+
     }
 
     public partial class MainWindow : Window
     {
         Etat_Inactive list;
+        List<string> etat;
         SocketClient Sk_client = SocketClient.GetInstance();
         public MainWindow()
         {
@@ -51,10 +63,17 @@ namespace Client_Distance
                 Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Send, new Action(delegate ()
                 {
 
-                    
-                    test_grid.ItemsSource = null;
-                    test_grid.ItemsSource = JsonConvert.DeserializeObject<List<Etat_Inactive>>(Sk_client.GetDataTableRunning());
+                    listName.Items.Clear();
 
+                    var names = JsonConvert.DeserializeObject<List<string>>(Sk_client.GetDataTableRunning());
+                    foreach (var name in names)
+                    {
+                        listName.Items.Add(name);
+                    }
+
+                   /* test_grid.ItemsSource = null;
+                    test_grid.ItemsSource = JsonConvert.DeserializeObject<List<Etat_Inactive>>(Sk_client.GetDataTableRunning());
+                   */
 
                 }));
                 Thread.Sleep(200);
@@ -73,7 +92,7 @@ namespace Client_Distance
             try
             {
                 list = (Etat_Inactive)test_grid.SelectedItems[0];
-                test_labs.Content = list.Name;
+                //test_labs.Content = list.SaveName;
             }
             catch
             {
@@ -83,12 +102,17 @@ namespace Client_Distance
 
         private void EndButton_Click(object sender, RoutedEventArgs e)
         {
-            Sk_client.Stop(list.Name);
+            Sk_client.Stop(list.SaveName);
         }
 
         private void pause_button_Click(object sender, RoutedEventArgs e)
         {
-            Sk_client.Playpause(list.Name);
+            Sk_client.Playpause(list.SaveName);
+        }
+
+        private void listName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
