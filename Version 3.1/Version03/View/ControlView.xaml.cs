@@ -46,28 +46,20 @@ namespace Version03.View
                 if (tName.Text.Length.Equals(0) || tSource.Text.Length.Equals(0) || tDestination.Text.Length.Equals(0))
                 {
 
-                    if (langue == 1)
-                    {
+                    
                         MessageBox.Show(" Please complete all fields !!", "ERROR");
-                    }
-                    else if (langue == 2)
-                    {
-                        MessageBox.Show("Remplisser tous les champs !!", "ERREUR");
-                    }
+                    
+                    
 
                 }
                 else
                 {
                     int type = 1;
                     viewmodel.MenuSub(saveName, sourceDir, targetDir, type, "");
-                    if (langue == 1)
-                    {
+                    
                         MessageBox.Show("Complete BACKUP Added!", "BackUp ADD");
-                    }
-                    else if (langue == 2)
-                    {
-                        MessageBox.Show("Travaill complet ajouté!");
-                    }
+                    
+                   
                     ShowListBox();
                 }
             }
@@ -75,14 +67,10 @@ namespace Version03.View
             {
                 if (tName.Text.Length.Equals(0) || tSource.Text.Length.Equals(0) || tDestination.Text.Length.Equals(0) || tMirror.Text.Length.Equals(0))
                 {
-                    if (langue == 1)
-                    {
+                    
                         MessageBox.Show(" Please complete all fields !!", "ERROR");
-                    }
-                    else if (langue == 2)
-                    {
-                        MessageBox.Show("Remplisser tous les champs !!", "ERREUR");
-                    }
+                    
+                    
 
                 }
                 else
@@ -90,28 +78,19 @@ namespace Version03.View
                     int type = 2;
                     mirrorDir = tMirror.Text;
                     viewmodel.MenuSub(saveName, sourceDir, targetDir, type, mirrorDir);
-                    if (langue == 1)
-                    {
+                    
                         MessageBox.Show("differentiel BACKUP Added!", "BackUp ADD");
-                    }
-                    else if (langue == 2)
-                    {
-                        MessageBox.Show("Travaill différentielle ajouté!");
-                    }
-
+                   
+                    
                     ShowListBox();
                 }
             }
             else
             {
-                if (langue == 1)
-                {
+               
                     MessageBox.Show(" Please complete all fields !!", "ERROR");
-                }
-                else if (langue == 2)
-                {
-                    MessageBox.Show("Remplisser tous les champs !!", "ERREUR");
-                }
+                
+                
             }
 
 
@@ -164,10 +143,7 @@ namespace Version03.View
             }
         }
 
-        private void Button_Click_6(object sender, RoutedEventArgs e)
-        {
-            Process.Start("notepad.exe", @"..\..\..\Ressources\CryptExtension.json");
-        }
+        
         
     }
 }

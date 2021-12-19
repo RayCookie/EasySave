@@ -41,14 +41,9 @@ namespace Version03.View
             {
                 while (Process.GetProcessesByName("Calculator").Length != 0)
                 {
-                    if (langue == 1)
-                    {
+                    
                         MessageBox.Show("Work paused ,close SoftwareWork to continue", "ERROR");
-                    }
-                    else if (langue == 2)
-                    {
-                        MessageBox.Show("Travail en pause,fermez la SoftwareWork et réesseyez ", "ERREUR");
-                    }
+                    
                 }
                     foreach (string filename in listName.SelectedItems)
                     {
@@ -56,29 +51,19 @@ namespace Version03.View
                         
 
                     }
-                    if (langue == 1)
-                    {
+                   
                         MessageBox.Show("BACKUP SELECTED Saved Succefully!", "SAVE BackUp");
-                    }
-                    else if (langue == 2)
-                    {
-                        MessageBox.Show("travailles sélectionées ajouté ! ", "Savegarde");
-                    }
-                
+                    
+                    
               
 
             }
             else
             {
-                if (langue == 1)
-                {
+               
                     MessageBox.Show(" please add or select a name in the list", "ERROR");
-                }
-                else if (langue == 2)
-                {
-                    MessageBox.Show("crée ou choisissez un travail", "ERREUR");
-                }
-
+                
+                
 
             }
         }
@@ -97,27 +82,19 @@ namespace Version03.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             viewmodel.pause();
-            if (langue == 1)
-            {
+            
                 MessageBox.Show(" load work paused ", "!!!");
-            }
-            else if (langue == 2)
-            {
-                MessageBox.Show("travail en pause", "!!!");
-            }
+            
+           
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             viewmodel.stop();
-            if (langue == 1)
-            {
+            
                 MessageBox.Show(" load work stoped ", "!!!");
-            }
-            else if (langue == 2)
-            {
-                MessageBox.Show("travail arreter", "!!!");
-            }
+          
+            
         }
 
         private void listName_SelectionChanged(object sender, SelectionChangedEventArgs e)

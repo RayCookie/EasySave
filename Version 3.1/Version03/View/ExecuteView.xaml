@@ -9,11 +9,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
-        <Label Content="{x:Static language:Lang.BackupList}"  HorizontalAlignment="Left" Margin="10,182,0,0"  VerticalAlignment="Top" Height="26" Width="124" />
+        <Label Content="{x:Static language:Lang.BackupList}"  HorizontalAlignment="Left" Margin="10,182,0,0"  VerticalAlignment="Top" Height="36" Width="165" FontSize="16"/>
 
-        <ListBox x:Name="listName" Margin="167,158,386,218" SelectionMode="Multiple" Background="White" SelectionChanged="listName_SelectionChanged" />
-        <Button Content="{x:Static language:Lang.Exec}" HorizontalAlignment="Left" Margin="457,180,0,0" VerticalAlignment="Top" Height="28" Width="83" Click="Button_Click_1" RenderTransformOrigin="-0.108,0.558"/>
-        <Button x:Name="pause" Content="pause" HorizontalAlignment="Left" Margin="465,256,0,0" VerticalAlignment="Top" Height="23" Width="75" Click="Button_Click"/>
-        <Button Content="stop" HorizontalAlignment="Left" Margin="465,327,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="Button_Click_3"/>
+        <ListBox x:Name="listName" Margin="180,158,373,218" SelectionMode="Multiple" Background="White" SelectionChanged="listName_SelectionChanged" />
+        <Button Content="{x:Static language:Lang.Exec}" HorizontalAlignment="Left" Margin="461,180,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="Button_Click_1" RenderTransformOrigin="-0.108,0.558" Background="#FF002D61" BorderBrush="#FF002D61" Foreground="White"/>
+        <Button x:Name="pause" Content="pause" HorizontalAlignment="Left" Margin="461,256,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="Button_Click" Background="#FF002D61" BorderBrush="#FF002D61" Foreground="White"/>
+        <Button Content="stop" HorizontalAlignment="Left" Margin="461,327,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="Button_Click_3" BorderBrush="#FF002D61" Background="#FF002D61" Foreground="White"/>
     </Grid>
 </UserControl>
